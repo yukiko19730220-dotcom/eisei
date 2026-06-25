@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>まりも本店 衛生管理（HACCP）</title>
+<style>
+  :root{
+    --green:#2f7d4f; --green-d:#225c39; --bg:#f4f1ea; --card:#fff;
+    --ink:#2a2a28; --sub:#6b6b66; --line:#e2ddd2; --ng:#c0392b; --ngbg:#fdecea;
+    --okbg:#e8f3ec; --warn:#b8860b;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    background:var(--bg); color:var(--ink); font-size:16px; line-height:1.6;
+    padding-bottom:78px;
+  }
+  header.app{
+    background:var(--green); color:#fff; padding:12px 16px; position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 6px rgba(0,0,0,.15);
+  }
+  header.app h1{font-size:16px; margin:0; font-weight:700; letter-spacing:.02em;}
+  header.app .date{font-size:13px; opacity:.92;}
+  main{padding:14px; max-width:760px; margin:0 auto;}
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:14px; box-shadow:0 1px 2px rgba(0,0,0,.04);}
+  .card h2{font-size:15px; margin:0 0 4px; color:var(--green-d); display:flex; align-items:center; gap:8px;}
+  .card h2 .tag{font-size:11px; background:var(--green); color:#fff; border-radius:6px; padding:2px 7px; font-weight:600;}
+  .card .lead{font-size:13px; color:var(--sub); margin:0 0 10px;}
+
+  .item{border-top:1px solid var(--line); padding:11px 0;}
+  .item:first-of-type{border-top:none;}
+  .item .q{font-weight:600; font-size:14.5px; margin-bottom:2px;}
+  .item .hint{font-size:12.5px; color:var(--sub); margin-bottom:8px;}
+  .seg{display:flex; gap:8px;}
+  .seg button{
+    flex:1; padding:10px 0; border:1.5px solid var(--line); background:#fafafa; border-radius:10px;
+    font-size:14px; font-weight:700; color:var(--sub); cursor:pointer;
+  }
+  .seg button.ok.on{background:var(--okbg); border-color:var(--green); color:var(--green-d);}
+  .seg button.ng.on{background:var(--ngbg); border-color:var(--ng); color:var(--ng);}
+  .memo{margin-top:8px; width:100%; border:1px solid var(--line); border-radius:9px; padding:8px 10px; font-size:14px; font-family:inherit; resize:vertical;}
+  .memo.show{display:block;} .memo.hide{display:none;}
+  .qchips{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+  .qchip{border:1px solid var(--line); background:#eef3ee; color:var(--green-d); border-radius:20px; padding:7px 11px; font-size:12.5px; font-weight:600; cursor:pointer; text-align:left;}
+  .qchip:active{background:#dfeae1;}
+
+  .temps{display:flex; flex-direction:column; gap:0;}
+  .temprow2{padding:10px 0; border-top:1px dashed var(--line);}
+  .temprow2:first-child{border-top:none;}
+  .tlabel{font-size:14px; margin-bottom:7px;}
+  .tctrl{display:flex; align-items:center; gap:8px;}
+  .tbtn{flex:0 0 50px; padding:10px 0; border:1.5px solid var(--line); border-radius:9px; background:#fafafa; font-size:18px; font-weight:800; color:var(--sub); cursor:pointer;}
+  .tbtn.ok.on{background:var(--okbg); border-color:var(--green); color:var(--green-d);}
+  .tbtn.ng.on{background:var(--ngbg); border-color:var(--ng); color:var(--ng);}
+  .tval{flex:1; min-width:0; padding:9px; border:1.5px solid var(--line); border-radius:9px; font-size:15px; text-align:right;}
+  .tval.bad{border-color:var(--ng); background:var(--ngbg);}
+  .tctrl .unit{color:var(--sub); font-size:13px;}
+
+  .savebar{position:fixed; left:0; right:0; bottom:64px; padding:8px 14px; display:flex; gap:10px; max-width:760px; margin:0 auto; z-index:40;}
+  .savebar .status{flex:1; align-self:center; font-size:12.5px; color:var(--sub);}
+  .btn{background:var(--green); color:#fff; border:none; padding:12px 18px; border-radius:11px; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,.15);}
+  .btn.sub{background:#fff; color:var(--green-d); border:1.5px solid var(--green);}
+  .btn.full{width:100%;}
+  .nabtn{width:100%; margin-bottom:6px; font-size:13px; padding:10px;}
+  .btn:active{transform:translateY(1px);}
+
+  nav.tabs{position:fixed; left:0; right:0; bottom:0; background:#fff; border-top:1px solid var(--line); display:flex; z-index:60;}
+  nav.tabs button{flex:1; border:none; background:none; padding:9px 0 12px; font-size:11px; color:var(--sub); cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:3px;}
+  nav.tabs button .ic{font-size:21px; line-height:1;}
+  nav.tabs button.on{color:var(--green); font-weight:700;}
+
+  .pill{display:inline-block; font-size:11px; padding:2px 8px; border-radius:20px; background:#eee; color:#555; margin-left:6px;}
+  .field{margin-bottom:12px;}
+  .field label{display:block; font-size:13px; color:var(--sub); margin-bottom:4px; font-weight:600;}
+  .field input,.field textarea{width:100%; padding:10px; border:1.5px solid var(--line); border-radius:9px; font-size:15px; font-family:inherit;}
+  .rowadd{display:flex; gap:8px; margin-top:8px;}
+  .rowadd input{flex:1;}
+  .chip{display:inline-flex; align-items:center; gap:6px; background:#eef3ee; border:1px solid var(--line); border-radius:20px; padding:5px 10px; margin:0 6px 6px 0; font-size:13px;}
+  .chip button{border:none; background:none; color:var(--ng); font-size:15px; cursor:pointer; padding:0; line-height:1;}
+
+  .plan h3{font-size:14.5px; color:var(--green-d); margin:14px 0 6px; padding-bottom:4px; border-bottom:2px solid var(--green);}
+  .plan table{width:100%; border-collapse:collapse; font-size:12.5px; margin-bottom:6px;}
+  .plan th,.plan td{border:1px solid var(--line); padding:7px 8px; text-align:left; vertical-align:top;}
+  .plan th{background:#eef3ee; color:var(--green-d); width:26%; font-weight:700;}
+  .plan .grp{background:#f7f4ec; font-weight:700; color:var(--warn);}
+
+  .histmonth{display:flex; justify-content:space-between; align-items:center; padding:12px 4px; border-top:1px solid var(--line);}
+  .histmonth:first-child{border-top:none;}
+  .histmonth .n{font-size:13px; color:var(--sub);}
+  .daylist{font-size:13px;}
+  .daylist .d{display:flex; justify-content:space-between; padding:8px 4px; border-top:1px dashed var(--line);}
+  .daylist .d .ng{color:var(--ng); font-weight:700;}
+  .small{font-size:12px; color:var(--sub);}
+  .notice{background:#fffbe6; border:1px solid #f0e2a8; border-radius:10px; padding:10px 12px; font-size:12.5px; color:#6b5a14; margin-bottom:12px;}
+
+  /* 印刷（PDF保存）用 */
+  #printArea{display:none;}
+  @media print{
+    body{background:#fff; padding:0;}
+    header.app, nav.tabs, .savebar, .view, .notice{display:none !important;}
+    #printArea{display:block !important; padding:0; font-size:11px; color:#000;}
+    #printArea h2{font-size:15px; margin:0 0 2px;}
+    #printArea .sub{font-size:11px; margin:0 0 10px; color:#333;}
+    #printArea table{width:100%; border-collapse:collapse; margin-bottom:14px;}
+    #printArea th,#printArea td{border:1px solid #888; padding:3px 4px; text-align:center; font-size:9.5px;}
+    #printArea th{background:#eee;}
+    #printArea td.l{text-align:left;}
+    #printArea .ng{background:#fde; font-weight:700;}
+    @page{size:A4 landscape; margin:10mm;}
+  }
+</style>
+</head>
+<body>
+
+<header class="app">
+  <h1>まりも本店 衛生管理</h1>
+  <div class="date" id="todayLabel"></div>
+</header>
+
+<main>
+
+<!-- ============ 記録 ============ -->
+<section class="view active" id="view-record">
+  <div class="notice">
+    HACCPに沿った衛生管理の<b>毎日の記録</b>です。各項目を「良 / 否」で記録し、否のときは内容と対応をメモしてください。入力は自動でこの端末に保存されます。
+  </div>
+
+  <div class="card">
+    <div class="field" style="margin:0;">
+      <label>記録日（過去の日付を選べば、手書き記録を遡って転記できます）</label>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button class="btn sub" style="padding:11px 12px; flex:0 0 auto;" onclick="shiftDate(-1)">◀前日</button>
+        <input type="date" id="recDate" style="flex:1; min-width:0;">
+        <button class="btn sub" style="padding:11px 12px; flex:0 0 auto;" onclick="shiftDate(1)">翌日▶</button>
+      </div>
+      <p class="small" style="margin:8px 0 0;">過去日を選ぶと、その日の入力欄に切り替わります。温度だけの記入でもOKです。</p>
+    </div>
+  </div>
+
+  <!-- 一般衛生管理 -->
+  <div class="card" id="generalCard">
+    <h2><span class="tag">基本</span>一般衛生管理</h2>
+    <p class="lead">全業種共通の土台。開店前〜閉店後を通して確認します。</p>
+    <div id="generalItems"></div>
+    <div class="item">
+      <div class="q">冷蔵庫・冷凍庫の温度確認</div>
+      <div class="hint">○＝基準内／×＝基準外を庫ごとにタップ。数値（任意）を入れると○×は自動で付きます。同じボタンをもう一度押すと解除。</div>
+      <div class="temps" id="tempRows"></div>
+    </div>
+  </div>
+
+  <!-- 重要管理 -->
+  <div class="card">
+    <h2><span class="tag">重要</span>重要管理（加熱・温度）</h2>
+    <p class="lead">提供・製造したメニューの区分に応じて確認します。該当しない区分は「該当なし」でOK。</p>
+    <div id="ccpItems"></div>
+  </div>
+
+  <!-- 業種別 -->
+  <div class="card">
+    <h2><span class="tag">食肉</span>食肉販売</h2>
+    <p class="lead">不要部位の除去・カット・包装・販売に伴う管理。</p>
+    <button class="btn sub nabtn" onclick="markNA('meat')">本日この業務なし → まとめて該当なし</button>
+    <div id="meatItems"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="tag">麺</span>麺類製造業（皿うどん等）</h2>
+    <p class="lead">仕入れ麺の加工（揚げ・生麺販売）に伴う管理。</p>
+    <button class="btn sub nabtn" onclick="markNA('noodle')">本日この業務なし → まとめて該当なし</button>
+    <div id="noodleItems"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="tag">惣菜</span>惣菜製造業</h2>
+    <p class="lead">作り置き・冷蔵/冷凍保存に伴う管理。</p>
+    <button class="btn sub nabtn" onclick="markNA('sozai')">本日この業務なし → まとめて該当なし</button>
+    <div id="sozaiItems"></div>
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label>記録者（初期値：ふだんの記録者を自動表示）</label>
+      <input type="text" id="recBy" placeholder="記録した人の名前">
+      <div id="recByChips" style="margin-top:8px;"></div>
+    </div>
+    <div class="field" style="margin:0;">
+      <label>特記事項（任意）</label>
+      <textarea class="memo show" id="recNote" rows="2" placeholder="その日の気づき・お客様対応など"></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 計画 ============ -->
+<section class="view plan" id="view-plan">
+  <div class="notice">まりも本店の<b>衛生管理計画</b>です。掲示・保健所提出時は右上メニューから印刷（PDF保存）してください。内容は実態に合わせて設定タブで店名等を編集できます。</div>
+  <button class="btn sub full" onclick="printPlan()" style="margin-bottom:14px;">この計画を印刷 / PDF保存</button>
+  <div id="planBody"></div>
+</section>
+
+<!-- ============ 履歴 ============ -->
+<section class="view" id="view-history">
+  <div class="notice">保存済みの記録です。月を選ぶと一覧が開き、<b>月単位でPDF/画像として出力</b>できます（保健所提示用）。</div>
+  <div class="card" id="histList"></div>
+  <div class="card" id="histDetail" style="display:none;"></div>
+</section>
+
+<!-- ============ 設定 ============ -->
+<section class="view" id="view-settings">
+  <div class="card">
+    <h2>店舗情報</h2>
+    <p class="lead">計画書・記録の表紙に表示されます。</p>
+    <div class="field"><label>屋号</label><input type="text" id="setShop"></div>
+    <div class="field"><label>営業者（代表者）</label><input type="text" id="setOwner"></div>
+    <div class="field"><label>所在地</label><input type="text" id="setAddr" placeholder="例）福岡市博多区…"></div>
+    <div class="field"><label>営業許可（保有）</label><input type="text" id="setLicense"></div>
+    <div class="field" style="margin:0;"><label>ふだんの記録者（記録タブの初期値）</label><input type="text" id="setRecorder"></div>
+  </div>
+
+  <div class="card">
+    <h2>冷蔵庫・冷凍庫の登録</h2>
+    <p class="lead">記録タブの温度欄に表示されます。お店にある庫を登録してください。</p>
+    <div id="fridgeChips"></div>
+    <div class="rowadd">
+      <input type="text" id="fridgeName" placeholder="例）冷蔵庫A（厨房）">
+      <select id="fridgeType" style="border:1.5px solid var(--line); border-radius:9px; padding:0 8px;">
+        <option value="冷蔵">冷蔵</option><option value="冷凍">冷凍</option>
+      </select>
+    </div>
+    <div class="rowadd">
+      <input type="number" step="0.1" id="fridgeLimit" placeholder="基準℃（任意・例 -50）" style="flex:1;">
+      <button class="btn sub" onclick="addFridge()">追加</button>
+    </div>
+    <p class="small" style="margin:6px 0 0;">基準℃を空欄にすると、冷蔵=10℃以下／冷凍=-15℃以下が自動で適用されます。</p>
+  </div>
+
+  <div class="card">
+    <h2>従業員の登録（任意）</h2>
+    <p class="lead">記録者の選択を楽にするための名簿です。</p>
+    <div id="staffChips"></div>
+    <div class="rowadd">
+      <input type="text" id="staffName" placeholder="名前">
+      <button class="btn sub" onclick="addStaff()">追加</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>データ管理</h2>
+    <p class="lead">記録はこの端末内に保存されます。機種変更前などはバックアップを取ってください。</p>
+    <button class="btn sub full" onclick="exportJSON()" style="margin-bottom:8px;">バックアップを書き出す</button>
+    <label class="btn sub full" style="display:block; text-align:center; margin-bottom:8px;">バックアップを読み込む
+      <input type="file" accept="application/json" onchange="importJSON(event)" style="display:none;">
+    </label>
+    <p class="small">アプリのバージョン: 1.0</p>
+  </div>
+</section>
+
+</main>
+
+<div class="savebar" id="saveBar">
+  <div class="status" id="saveStatus">入力すると自動保存されます</div>
+  <button class="btn" onclick="goHistory()">記録を確認</button>
+</div>
+
+<nav class="tabs">
+  <button data-v="record" class="on" onclick="show('record')"><span class="ic">📝</span>記録</button>
+  <button data-v="plan" onclick="show('plan')"><span class="ic">📋</span>計画</button>
+  <button data-v="history" onclick="show('history')"><span class="ic">📂</span>履歴</button>
+  <button data-v="settings" onclick="show('settings')"><span class="ic">⚙️</span>設定</button>
+</nav>
+
+<div id="printArea"></div>
+
+<script>
+"use strict";
+/* ===================== データ ===================== */
+const LS_SET="marimo_eisei_settings_v1";
+const LS_REC="marimo_eisei_records_v1";
+
+const defaultSettings={
+  shop:"まりも本店",
+  owner:"半田 義樹",
+  addr:"福岡市博多区上呉服町11番212号",
+  license:"飲食店営業 / 食肉販売業 / 麺類製造業 / そうざい製造業",
+  fridges:[
+    {name:"台下冷蔵庫",type:"冷蔵"},
+    {name:"キッチン内冷凍庫",type:"冷凍"},
+    {name:"入口冷凍庫１",type:"冷凍"},
+    {name:"入口冷凍庫２",type:"冷凍"},
+    {name:"マグロストッカー",type:"冷凍",limit:-50},
+    {name:"ドリンク冷蔵庫小",type:"冷蔵"},
+    {name:"４ドア冷蔵庫",type:"冷蔵"},
+    {name:"ドリンク冷蔵庫大",type:"冷蔵"},
+    {name:"肉用冷凍庫",type:"冷凍"}
+  ],
+  recorder:"半田 友紀子",
+  staff:["半田 友紀子","半田 義樹"]
+};
+
+let settings=load(LS_SET,defaultSettings);
+let records=load(LS_REC,{}); // { "2026-05-31": {...} }
+
+function load(k,def){ try{const v=JSON.parse(localStorage.getItem(k)); return v||structuredClone(def);}catch(e){return structuredClone(def);} }
+function saveSettings(){ localStorage.setItem(LS_SET,JSON.stringify(settings)); }
+function saveRecords(){ localStorage.setItem(LS_REC,JSON.stringify(records)); flash(); }
+
+/* ===================== チェック項目の定義 ===================== */
+const generalDefs=[
+  {id:"g_uke",  q:"原材料の受入確認", hint:"納品時に外観・におい・包装の状態・期限・配送温度を確認。異常があれば返品。"},
+  {id:"g_cross",q:"交差汚染・二次汚染の防止", hint:"生肉・生魚と加熱済み/そのまま食べる物で器具・まな板を使い分け。手袋・容器の分別。"},
+  {id:"g_wash", q:"器具等の洗浄・消毒・殺菌", hint:"まな板・包丁・ふきん等を洗浄し、必要に応じ熱湯/塩素/アルコールで消毒。"},
+  {id:"g_toilet",q:"トイレの洗浄・消毒", hint:"便座・水栓・ドアノブ・床を清掃・消毒。専用清掃用具を使用。"},
+  {id:"g_health",q:"従業員の健康管理・清潔な作業着", hint:"下痢・嘔吐・発熱・手の傷の有無を確認。清潔な作業着・帽子・マスクを着用。傷があれば耐水性絆創膏＋手袋で対応し、内容を記録。", alwaysMemo:true, quick:["手指に傷→耐水性絆創膏＋手袋で対応","体調不良者なし・身だしなみ良好"]},
+  {id:"g_hand", q:"衛生的な手洗いの実施", hint:"トイレ後・作業前・生肉等を扱った後など、適切なタイミングで石けん手洗い。"}
+];
+const ccpDefs=[
+  {id:"c_raw", grp:"区分1", q:"非加熱でそのまま提供", hint:"刺身・タタキ・サラダ・前菜など。提供直前に冷蔵庫から出し、長く常温に置かない。"},
+  {id:"c_heat",grp:"区分2", q:"加熱してすぐ提供", hint:"鉄板焼・焼物・鍋物・皿うどんなど。中心部まで十分に加熱（目安75℃1分以上）したか確認。"},
+  {id:"c_hold",grp:"区分3", q:"加熱後の保管・再加熱・冷却", hint:"煮込み等の作り置き。温蔵は65℃以上、冷却は速やかに冷蔵、再加熱は中心75℃以上。"}
+];
+const meatDefs=[
+  {id:"m_recv", q:"食肉の受入・保管温度の確認", hint:"納品時の温度・期限・包装を確認。食肉は10℃以下（推奨4℃以下）で保管。"},
+  {id:"m_tool", q:"食肉専用の器具使用・交差汚染防止", hint:"不要部位除去・カット時は食肉専用のまな板・包丁・手袋を使用し他食材と分離。"},
+  {id:"m_pack", q:"包装・消費期限の設定と表示", hint:"カット肉の包装・計量、消費期限・保存方法・名称等の表示を確認。"}
+];
+const noodleDefs=[
+  {id:"n_recv", q:"仕入れ麺の受入確認", hint:"製麺所からの麺の外観・におい・期限・温度を確認。"},
+  {id:"n_fry",  q:"揚げ工程・揚げ油の管理", hint:"皿うどん等の揚げ温度・揚げ時間が適切か、油の劣化（色・におい）を確認・交換。"},
+  {id:"n_cool", q:"揚げ後/生麺の冷却・包装・期限表示", hint:"揚げ麺は十分に冷ましてから包装。生麺販売は保管温度と消費期限表示を確認。"}
+];
+const sozaiDefs=[
+  {id:"s_cool", q:"加熱後の速やかな冷却", hint:"作り置き惣菜は加熱後できるだけ早く冷却（目安：30分以内に20℃/60分以内に10℃付近）。"},
+  {id:"s_store",q:"冷蔵/冷凍の保管温度", hint:"冷蔵10℃以下・冷凍-15℃以下で保管。庫内温度は一般衛生管理の温度欄で記録。"},
+  {id:"s_pack", q:"小分け・包装時の二次汚染防止と期限設定", hint:"清潔な器具・手袋で小分け。消費/賞味期限を設定し表示。"}
+];
+const allDefs=[...generalDefs,...ccpDefs,...meatDefs,...noodleDefs,...sozaiDefs];
+function defById(id){ return allDefs.find(d=>d.id===id); }
+
+/* ===================== 記録UIの生成 ===================== */
+function segHTML(id){
+  return `<div class="seg" data-id="${id}">
+    <button class="ok" onclick="setVal('${id}','ok')">良</button>
+    <button class="ng" onclick="setVal('${id}','ng')">否</button>
+    <button class="na" onclick="setVal('${id}','na')" style="flex:0 0 88px;">該当なし</button>
+  </div>`;
+}
+function itemHTML(d){
+  const memoCls=d.alwaysMemo?"memo show":"memo hide";
+  const ph=d.alwaysMemo?"気づいた事と対応を記入（例：Aさん手指に傷→絆創膏＋手袋）":"否のとき：内容と対応を記入";
+  const quick=d.quick?`<div class="qchips">${d.quick.map(q=>`<button type="button" class="qchip" onclick="appendMemo('${d.id}','${q.replace(/'/g,"\\'")}')">＋${q}</button>`).join("")}</div>`:"";
+  return `<div class="item">
+    <div class="q">${d.q}</div>
+    <div class="hint">${d.hint}</div>
+    ${segHTML(d.id)}
+    ${quick}
+    <textarea class="${memoCls}" id="memo_${d.id}" rows="2" placeholder="${ph}" oninput="onMemo('${d.id}',this.value)"></textarea>
+  </div>`;
+}
+function appendMemo(id,text){
+  const m=document.getElementById("memo_"+id); if(!m)return;
+  m.value=m.value.trim()?(m.value.replace(/\s*$/,"")+" / "+text):text;
+  onMemo(id,m.value);
+}
+function renderRecordUI(){
+  document.getElementById("generalItems").innerHTML=generalDefs.map(itemHTML).join("");
+  document.getElementById("ccpItems").innerHTML=ccpDefs.map(d=>{
+    return `<div class="item"><div class="q"><span class="pill">${d.grp}</span> ${d.q}</div><div class="hint">${d.hint}</div>${segHTML(d.id)}<textarea class="memo hide" id="memo_${d.id}" rows="2" placeholder="否のとき：内容と対応を記入" oninput="onMemo('${d.id}',this.value)"></textarea></div>`;
+  }).join("");
+  document.getElementById("meatItems").innerHTML=meatDefs.map(itemHTML).join("");
+  document.getElementById("noodleItems").innerHTML=noodleDefs.map(itemHTML).join("");
+  document.getElementById("sozaiItems").innerHTML=sozaiDefs.map(itemHTML).join("");
+  renderTempRows();
+}
+function renderTempRows(){
+  const wrap=document.getElementById("tempRows");
+  wrap.innerHTML=settings.fridges.map((f,i)=>{
+    const lim="≤ "+tempLimit(f);
+    return `<div class="temprow2">
+      <div class="tlabel">${f.name}<span class="small">（${f.type} ${lim}℃）</span></div>
+      <div class="tctrl">
+        <button class="tbtn ok" id="tok_${i}" onclick="setTempMark(${i},'ok')">○</button>
+        <button class="tbtn ng" id="tng_${i}" onclick="setTempMark(${i},'ng')">×</button>
+        <input type="number" inputmode="decimal" step="0.1" class="tval" id="temp_${i}" placeholder="数値(任意)" oninput="onTemp(${i},this.value)">
+        <span class="unit">℃</span>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+/* ===================== 記録の読み書き ===================== */
+let curDate=todayStr();
+function todayStr(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function blankRecord(){return {checks:{},temps:{},tmarks:{},by:(settings&&settings.recorder)||"",note:""};}
+
+function getRec(){ if(!records[curDate]) records[curDate]=blankRecord(); return records[curDate]; }
+
+function setVal(id,val){
+  const r=getRec(); r.checks[id]=val;
+  paintSeg(id,val);
+  const m=document.getElementById("memo_"+id);
+  if(m){ const always=(defById(id)||{}).alwaysMemo; m.className="memo "+((val==="ng"||always)?"show":"hide"); }
+  saveRecords();
+}
+function markNA(which){
+  const map={meat:meatDefs,noodle:noodleDefs,sozai:sozaiDefs};
+  (map[which]||[]).forEach(d=>setVal(d.id,"na"));
+}
+function onMemo(id,v){ getRec().memos=getRec().memos||{}; getRec().memos[id]=v; saveRecords(); }
+function setTempMark(i,mark){
+  const r=getRec(); r.tmarks=r.tmarks||{};
+  r.tmarks[i]=(r.tmarks[i]===mark)?"":mark; // 同じボタン再タップで解除
+  paintTempMark(i); saveRecords();
+}
+function onTemp(i,v){
+  const r=getRec(); r.temps[i]=v; r.tmarks=r.tmarks||{};
+  if(v!==""&&!isNaN(parseFloat(v))){ r.tmarks[i]=isTempBad(i,v)?"ng":"ok"; } // 数値を入れたら○×を自動設定
+  const inp=document.getElementById("temp_"+i); if(inp){ inp.classList.toggle("bad",isTempBad(i,v)); }
+  paintTempMark(i); saveRecords();
+}
+function paintTempMark(i){
+  const r=records[curDate]||blankRecord();
+  const mark=(r.tmarks&&r.tmarks[i])||"";
+  const ok=document.getElementById("tok_"+i), ng=document.getElementById("tng_"+i);
+  if(ok) ok.classList.toggle("on",mark==="ok");
+  if(ng) ng.classList.toggle("on",mark==="ng");
+}
+function tempLimit(f){ if(f && f.limit!=null && f.limit!=="" && !isNaN(parseFloat(f.limit))) return parseFloat(f.limit); return (f&&f.type==="冷凍") ? -15 : 10; }
+function isTempBad(i,v){ if(v===""||v==null) return false; const f=settings.fridges[i]; if(!f) return false; const n=parseFloat(v); if(isNaN(n))return false; return n > tempLimit(f); }
+
+function paintSeg(id,val){
+  const seg=document.querySelector('.seg[data-id="'+id+'"]'); if(!seg)return;
+  seg.querySelectorAll("button").forEach(b=>b.classList.remove("on"));
+  if(val==="ok") seg.querySelector(".ok").classList.add("on");
+  if(val==="ng") seg.querySelector(".ng").classList.add("on");
+  if(val==="na"){ const na=seg.querySelector(".na"); na.classList.add("on"); na.style.background="#eef"; na.style.borderColor="#88a"; na.style.color="#456"; }
+  else { const na=seg.querySelector(".na"); if(na){na.style.background="";na.style.borderColor="";na.style.color="";} }
+}
+
+function loadDateIntoUI(){
+  const r=records[curDate]||blankRecord();
+  allDefs.forEach(d=>{
+    const v=r.checks[d.id];
+    paintSeg(d.id, v||null);
+    const m=document.getElementById("memo_"+d.id);
+    if(m){ m.value=(r.memos&&r.memos[d.id])||""; m.className="memo "+((v==="ng"||d.alwaysMemo)?"show":"hide"); }
+  });
+  settings.fridges.forEach((f,i)=>{
+    const inp=document.getElementById("temp_"+i);
+    if(inp){ inp.value=(r.temps&&r.temps[i]!=null)?r.temps[i]:""; inp.classList.toggle("bad",isTempBad(i,inp.value)); }
+    paintTempMark(i);
+  });
+  document.getElementById("recBy").value=r.by||"";
+  document.getElementById("recNote").value=r.note||"";
+}
+document.getElementById("recBy").addEventListener("input",e=>{getRec().by=e.target.value;saveRecords();});
+function pickRecBy(name){ document.getElementById("recBy").value=name; getRec().by=name; saveRecords(); }
+function renderRecByChips(){
+  const el=document.getElementById("recByChips"); if(!el)return;
+  el.innerHTML=(settings.staff||[]).map(s=>`<button class="btn sub" style="padding:6px 12px; margin:0 6px 6px 0; font-size:13px;" onclick="pickRecBy('${s.replace(/'/g,"\\'")}')">${s}</button>`).join("");
+}
+document.getElementById("recNote").addEventListener("input",e=>{getRec().note=e.target.value;saveRecords();});
+document.getElementById("recDate").addEventListener("change",e=>{curDate=e.target.value||todayStr();loadDateIntoUI();});
+function shiftDate(delta){
+  if(!curDate) curDate=todayStr();
+  const p=curDate.split("-").map(Number);
+  const dt=new Date(p[0],p[1]-1,p[2]+delta);
+  curDate=dt.getFullYear()+"-"+String(dt.getMonth()+1).padStart(2,"0")+"-"+String(dt.getDate()).padStart(2,"0");
+  document.getElementById("recDate").value=curDate;
+  loadDateIntoUI();
+}
+
+let flashT;
+function flash(){const s=document.getElementById("saveStatus");s.textContent="✓ 保存しました "+new Date().toLocaleTimeString("ja-JP",{hour:"2-digit",minute:"2-digit"});clearTimeout(flashT);flashT=setTimeout(()=>{s.textContent="入力すると自動保存されます";},2500);}
+
+/* ===================== 計画タブ ===================== */
+function planTable(title,rows){
+  let h=`<h3>${title}</h3><table>`;
+  rows.forEach(r=>{
+    if(r.grp){ h+=`<tr><td class="grp" colspan="2">${r.grp}</td></tr>`; }
+    else h+=`<tr><th>${r.q}</th><td>${r.plan}</td></tr>`;
+  });
+  return h+"</table>";
+}
+function renderPlan(){
+  const s=settings;
+  let h=`<div class="card">
+    <table>
+      <tr><th>屋号</th><td>${s.shop||"—"}</td></tr>
+      <tr><th>営業者</th><td>${s.owner||"—"}</td></tr>
+      <tr><th>所在地</th><td>${s.addr||"—"}</td></tr>
+      <tr><th>営業許可</th><td>${s.license||"—"}</td></tr>
+      <tr><th>方式</th><td>HACCPの考え方を取り入れた衛生管理</td></tr>
+    </table>
+  </div><div class="card plan">`;
+
+  h+=planTable("① 一般衛生管理（共通の土台）",[
+    {q:"原材料の受入確認",plan:"<b>いつ：</b>納品時　<b>方法：</b>外観・におい・包装・期限・配送温度を確認　<b>問題時：</b>返品・交換、納入業者へ連絡"},
+    {q:"庫内温度の確認",plan:"<b>いつ：</b>始業時・営業中　<b>方法：</b>冷蔵10℃以下・冷凍-15℃以下を確認・記録　<b>問題時：</b>設定調整・故障連絡、食材の状態確認"},
+    {q:"交差汚染・二次汚染の防止",plan:"<b>いつ：</b>作業中　<b>方法：</b>生肉/生魚と加熱済・そのまま食べる物で器具を使い分け、保管を区分　<b>問題時：</b>洗浄消毒し直す"},
+    {q:"器具等の洗浄・消毒・殺菌",plan:"<b>いつ：</b>使用後・閉店後　<b>方法：</b>洗剤で洗浄後、熱湯/塩素/アルコールで消毒　<b>問題時：</b>再洗浄"},
+    {q:"トイレの洗浄・消毒",plan:"<b>いつ：</b>始業時・営業中　<b>方法：</b>便座・水栓・ドアノブ・床を清掃消毒（専用用具）　<b>問題時：</b>清掃し直す"},
+    {q:"従業員の健康管理・身だしなみ",plan:"<b>いつ：</b>始業時　<b>方法：</b>下痢・嘔吐・発熱・手の傷を確認、清潔な作業着　<b>問題時：</b>盛付等の作業から外す・受診"},
+    {q:"衛生的な手洗い",plan:"<b>いつ：</b>作業前・トイレ後・生肉等を扱った後　<b>方法：</b>石けんで二度洗い　<b>問題時：</b>洗い直す"}
+  ]);
+
+  h+=planTable("② 重要管理（メニューの区分ごと）",[
+    {grp:"区分1：非加熱でそのまま提供（刺身・タタキ・サラダ・前菜 等）"},
+    {q:"温度・時間の管理",plan:"提供する分だけ提供直前に冷蔵庫から出す。長時間の常温放置をしない。<b>問題時：</b>状態を確認し、疑わしければ廃棄"},
+    {grp:"区分2：加熱してすぐ提供（鉄板焼・焼物・鍋物・皿うどん 等）"},
+    {q:"加熱の確認",plan:"中心部まで十分に加熱（目安：中心75℃1分以上、二枚貝等は85〜90℃90秒以上）。<b>問題時：</b>追加加熱"},
+    {grp:"区分3：加熱後に保管・冷却・再加熱（煮込み等の作り置き）"},
+    {q:"保管・冷却・再加熱",plan:"温かく保管は65℃以上。冷却は速やかに（30分以内に20℃/60分以内に10℃付近を目安）冷蔵。再加熱は中心75℃以上。<b>問題時：</b>廃棄または十分に再加熱"}
+  ]);
+
+  h+=planTable("③ 食肉販売業（不要部位の除去・カット・包装・販売）",[
+    {q:"受入・保管",plan:"納品時の温度・期限・包装を確認。食肉は10℃以下（推奨4℃以下）で保管。<b>問題時：</b>返品・廃棄"},
+    {q:"整形・カット時の交差汚染防止",plan:"食肉専用のまな板・包丁・手袋を使用し、他食材と作業・保管を分離。器具は都度洗浄消毒。"},
+    {q:"包装・期限・表示",plan:"清潔な環境で包装・計量。消費期限・保存方法・名称等を適切に設定・表示。<b>問題時：</b>表示修正・販売中止"}
+  ]);
+
+  h+=planTable("④ 麺類製造業（仕入れ麺の加工・皿うどん・生麺販売）",[
+    {q:"仕入れ麺の受入",plan:"製麺所からの麺の外観・におい・期限・温度を確認。<b>問題時：</b>返品"},
+    {q:"揚げ工程・油の管理",plan:"揚げ温度・時間を適切に管理。揚げ油の劣化（色・におい・泡）を確認し交換。<b>問題時：</b>油交換・再加熱"},
+    {q:"冷却・包装・期限表示",plan:"揚げ麺は十分冷ましてから包装。生麺販売は保管温度・消費期限・保存方法を表示。<b>問題時：</b>表示修正"}
+  ]);
+
+  h+=planTable("⑤ そうざい製造業（作り置き・冷蔵/冷凍保存）",[
+    {q:"加熱後の冷却",plan:"加熱後できるだけ早く冷却（目安：30分以内に20℃/60分以内に10℃付近）。<b>問題時：</b>急速冷却・廃棄"},
+    {q:"保管温度",plan:"冷蔵10℃以下・冷凍-15℃以下で保管。庫内温度を毎日記録。<b>問題時：</b>設定調整・状態確認"},
+    {q:"小分け・包装・期限設定",plan:"清潔な器具・手袋で小分けし二次汚染を防止。消費/賞味期限を設定・表示。<b>問題時：</b>表示修正・廃棄"}
+  ]);
+
+  h+=`<p class="small" style="margin-top:10px;">※ 温度・時間の数値は一般的な目安です。実際の食材・メニューに合わせ、必要に応じて保健所の指導や業界団体の手引書に沿って調整してください。</p></div>`;
+  document.getElementById("planBody").innerHTML=h;
+}
+
+/* ===================== 履歴・出力 ===================== */
+function ngCount(r){
+  let n=0; if(!r)return 0;
+  Object.values(r.checks||{}).forEach(v=>{if(v==="ng")n++;});
+  settings.fridges.forEach((f,i)=>{ if((r.tmarks&&r.tmarks[i])==="ng") n++; });
+  return n;
+}
+function renderHistory(){
+  const dates=Object.keys(records).sort().reverse();
+  const months={};
+  dates.forEach(d=>{const m=d.slice(0,7);(months[m]=months[m]||[]).push(d);});
+  const list=document.getElementById("histList");
+  if(dates.length===0){ list.innerHTML='<p class="lead">まだ記録がありません。「記録」タブから入力してください。</p>'; document.getElementById("histDetail").style.display="none"; return;}
+  let h="<h2>記録のある月</h2>";
+  Object.keys(months).sort().reverse().forEach(m=>{
+    let ng=0; months[m].forEach(d=>ng+=ngCount(records[d]));
+    h+=`<div class="histmonth"><div><b>${m.replace("-","年")}月</b><div class="n">${months[m].length}日分の記録${ng>0?` ・ 否 ${ng}件`:""}</div></div>
+      <button class="btn sub" onclick="openMonth('${m}')">開く</button></div>`;
+  });
+  list.innerHTML=h;
+  document.getElementById("histDetail").style.display="none";
+}
+function openMonth(m){
+  const dates=Object.keys(records).filter(d=>d.startsWith(m)).sort();
+  let h=`<h2>${m.replace("-","年")}月の記録</h2>
+    <button class="btn full" onclick="printMonth('${m}')" style="margin:6px 0 12px;">この月をPDF/画像で出力</button>
+    <div class="daylist">`;
+  dates.forEach(d=>{
+    const r=records[d]; const ng=ngCount(r);
+    h+=`<div class="d"><span>${d.slice(8)}日（${weekday(d)}）　記録者:${r.by||"—"}</span><span class="${ng>0?'ng':''}">${ng>0?'否 '+ng+'件':'良好'}</span></div>`;
+  });
+  h+="</div>";
+  const det=document.getElementById("histDetail"); det.style.display="block"; det.innerHTML=h;
+  det.scrollIntoView({behavior:"smooth"});
+}
+function weekday(d){return ["日","月","火","水","木","金","土"][new Date(d).getDay()];}
+
+/* 月次の印刷用テーブル生成（PDF/画像で保存） */
+function printMonth(m){
+  const dates=Object.keys(records).filter(d=>d.startsWith(m)).sort();
+  const cols=[...generalDefs,...ccpDefs,...meatDefs,...noodleDefs,...sozaiDefs];
+  let h=`<h2>${settings.shop}　衛生管理 記録表（${m.replace("-","年")}月）</h2>
+    <div class="sub">営業者：${settings.owner}　／　営業許可：${settings.license}　／　○=良 ×=否 －=該当なし</div>
+    <table><thead><tr><th>日</th><th>記録者</th>`;
+  cols.forEach(c=>{h+=`<th>${c.q}</th>`;});
+  settings.fridges.forEach(f=>{h+=`<th>${f.name}<br>(℃)</th>`;});
+  h+=`<th>特記</th></tr></thead><tbody>`;
+  dates.forEach(d=>{
+    const r=records[d];
+    h+=`<tr><td>${d.slice(8)}(${weekday(d)})</td><td>${r.by||""}</td>`;
+    cols.forEach(c=>{
+      const v=(r.checks||{})[c.id];
+      const mark=v==="ok"?"○":v==="ng"?"×":v==="na"?"－":"";
+      h+=`<td class="${v==='ng'?'ng':''}">${mark}</td>`;
+    });
+    settings.fridges.forEach((f,i)=>{
+      const t=(r.temps&&r.temps[i]!=null)?r.temps[i]:"";
+      const has=(t!==""&&!isNaN(parseFloat(t)));
+      const mk=(r.tmarks&&r.tmarks[i])||"";
+      const sym=mk==="ok"?"○":mk==="ng"?"×":"";
+      const cell=has?(t+(sym?("<br>"+sym):"")):sym;
+      h+=`<td class="${mk==='ng'?'ng':''}">${cell}</td>`;
+    });
+    h+=`<td class="l">${escapeHtml(r.note||"")}</td></tr>`;
+  });
+  h+=`</tbody></table>
+    <div class="sub">対応・気づきの記録（否対応・健康管理など）：</div><table><thead><tr><th>日</th><th>項目</th><th>内容・対応</th></tr></thead><tbody>`;
+  let any=false;
+  dates.forEach(d=>{
+    const r=records[d];
+    cols.forEach(c=>{
+      const isng=(r.checks||{})[c.id]==="ng";
+      const memo=(r.memos&&r.memos[c.id])||"";
+      if(isng||memo){ any=true; h+=`<tr><td>${d.slice(8)}日</td><td class="l">${c.q}${isng?"（否）":""}</td><td class="l">${escapeHtml(memo)}</td></tr>`; }
+    });
+  });
+  if(!any) h+=`<tr><td colspan="3" class="l">この月は否・特記の対応記録はありません。</td></tr>`;
+  h+="</tbody></table>";
+  document.getElementById("printArea").innerHTML=h;
+  window.print();
+}
+function printPlan(){
+  renderPlan();
+  const planHtml=document.getElementById("planBody").innerHTML
+    .replace(/class="card plan"/g,'').replace(/class="card"/g,'').replace(/class="pill"/g,'');
+  document.getElementById("printArea").innerHTML=`<h2>${settings.shop}　衛生管理計画</h2><div class="sub">HACCPの考え方を取り入れた衛生管理</div>`+planHtml;
+  window.print();
+}
+function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+
+/* ===================== 設定タブ ===================== */
+function renderSettings(){
+  document.getElementById("setShop").value=settings.shop||"";
+  document.getElementById("setOwner").value=settings.owner||"";
+  document.getElementById("setAddr").value=settings.addr||"";
+  document.getElementById("setLicense").value=settings.license||"";
+  document.getElementById("setRecorder").value=settings.recorder||"";
+  renderFridgeChips(); renderStaffChips();
+}
+["setShop","setOwner","setAddr","setLicense","setRecorder"].forEach(id=>{
+  document.getElementById(id).addEventListener("input",e=>{
+    const key={setShop:"shop",setOwner:"owner",setAddr:"addr",setLicense:"license",setRecorder:"recorder"}[id];
+    settings[key]=e.target.value; saveSettings();
+  });
+});
+function renderFridgeChips(){
+  document.getElementById("fridgeChips").innerHTML=settings.fridges.map((f,i)=>
+    `<span class="chip">${f.name}（${f.type} ≤${tempLimit(f)}℃）<button onclick="delFridge(${i})">×</button></span>`).join("")||'<span class="small">未登録</span>';
+}
+function addFridge(){
+  const n=document.getElementById("fridgeName").value.trim(); if(!n)return;
+  const obj={name:n,type:document.getElementById("fridgeType").value};
+  const lim=document.getElementById("fridgeLimit").value.trim();
+  if(lim!==""&&!isNaN(parseFloat(lim))) obj.limit=parseFloat(lim);
+  settings.fridges.push(obj);
+  document.getElementById("fridgeName").value=""; document.getElementById("fridgeLimit").value="";
+  saveSettings(); renderFridgeChips(); renderTempRows(); loadDateIntoUI();
+}
+function delFridge(i){ settings.fridges.splice(i,1); saveSettings(); renderFridgeChips(); renderTempRows(); loadDateIntoUI(); }
+function renderStaffChips(){
+  document.getElementById("staffChips").innerHTML=settings.staff.map((s,i)=>
+    `<span class="chip">${s}<button onclick="delStaff(${i})">×</button></span>`).join("")||'<span class="small">未登録</span>';
+}
+function addStaff(){ const n=document.getElementById("staffName").value.trim(); if(!n)return; settings.staff.push(n); document.getElementById("staffName").value=""; saveSettings(); renderStaffChips(); renderRecByChips(); }
+function delStaff(i){ settings.staff.splice(i,1); saveSettings(); renderStaffChips(); renderRecByChips(); }
+
+/* ===================== バックアップ ===================== */
+function exportJSON(){
+  const blob=new Blob([JSON.stringify({settings,records},null,2)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+  a.download="marimo_eisei_backup_"+todayStr()+".json"; a.click();
+}
+function importJSON(e){
+  const f=e.target.files[0]; if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{ try{ const o=JSON.parse(r.result); if(o.settings)settings=o.settings; if(o.records)records=o.records; saveSettings(); localStorage.setItem(LS_REC,JSON.stringify(records)); initAll(); alert("読み込みました。"); }catch(err){alert("ファイルを読み込めませんでした。");} };
+  r.readAsText(f);
+}
+
+/* ===================== ナビ ===================== */
+function show(v){
+  document.querySelectorAll(".view").forEach(s=>s.classList.remove("active"));
+  document.getElementById("view-"+v).classList.add("active");
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
+  document.getElementById("saveBar").style.display=(v==="record")?"flex":"none";
+  if(v==="plan")renderPlan();
+  if(v==="history")renderHistory();
+  if(v==="settings")renderSettings();
+  window.scrollTo(0,0);
+}
+function goHistory(){show("history");}
+
+/* ===================== 初期化 ===================== */
+function initAll(){
+  document.getElementById("todayLabel").textContent=new Date().toLocaleDateString("ja-JP",{month:"long",day:"numeric",weekday:"short"});
+  document.getElementById("recDate").value=curDate;
+  renderRecordUI();
+  loadDateIntoUI();
+  renderRecByChips();
+}
+initAll();
+</script>
+</body>
+</html>
