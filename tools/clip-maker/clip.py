@@ -230,12 +230,12 @@ def build_filter(style, crop_x, fps):
     ).format(cx=crop_x, fps=fps)
 
 
-def cut(src, start, length, out_path, style, crop_x, fps, audio):
+def cut(src, start, length, out_path, style, crop_x, fps, audio, preset):
     vf = build_filter(style, crop_x, fps)
     cmd = [FFMPEG, "-hide_banner", "-nostats", "-y",
            "-ss", "{:.2f}".format(start), "-i", src, "-t", str(length)]
     cmd += ["-filter_complex" if style == "blur" else "-vf", vf]
-    cmd += ["-c:v", "libx264", "-preset", "medium", "-crf", "20",
+    cmd += ["-c:v", "libx264", "-preset", preset, "-crf", "20",
             "-profile:v", "high", "-level", "4.0", "-g", str(fps * 2)]
     if audio:
         cmd += ["-c:a", "aac", "-b:a", "128k", "-ar", "48000", "-ac", "2"]
@@ -268,6 +268,10 @@ def main():
     ap.add_argument("--crop-x", type=float, default=0.5,
                     help="切り出す横位置 0.0=左端 0.5=中央 1.0=右端（既定: 0.5）")
     ap.add_argument("--fps", type=int, default=30, help="書き出しfps（既定: 30）")
+    ap.add_argument("--preset", default="medium",
+                    choices=["ultrafast", "superfast", "veryfast", "faster",
+                             "fast", "medium", "slow"],
+                    help="書き出し速度。スマホでは veryfast 推奨（既定: medium）")
     ap.add_argument("--skip-head", type=int, default=60, help="冒頭の除外秒数（既定: 60）")
     ap.add_argument("--skip-tail", type=int, default=60, help="末尾の除外秒数（既定: 60）")
     ap.add_argument("--gap", type=int, default=60, help="切り抜き同士の最低間隔・秒（既定: 60）")
@@ -319,7 +323,7 @@ def main():
         out_path = os.path.join(args.outdir, name)
         print("■ 書き出し {}/{}  {}".format(i, len(picked), name))
         cut(args.input, start, args.length, out_path,
-            args.style, args.crop_x, args.fps, audio)
+            args.style, args.crop_x, args.fps, audio, args.preset)
         rows.append({
             "ファイル名": name,
             "開始": hhmmss(start),
