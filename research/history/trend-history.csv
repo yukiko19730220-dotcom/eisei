@@ -1,11 +1,11 @@
-date,theme_id,theme_name_en,rank,score,decision
-2026-08-26,cozy-kitchen-witch,Cozy Kitchen Witch,S,87,今すぐ作る
-2026-08-26,grandmacore-cottage,Grandmacore Cottage Coloring,S,85,今すぐ作る
-2026-08-26,cozy-cafe-bookstore,Cozy Cafe & Bookstore Series,S,84,今すぐ作る
-2026-08-26,capybara-cottagecore,Capybara Cozy & Cottagecore,A,79,テストする
-2026-08-26,cottagecore-mushroom-garden,Cottagecore Mushroom & Garden,A,77,テストする
-2026-08-26,grayscale-photorealistic,Grayscale Photorealistic Nature & Animals,A,76,テストする
-2026-08-26,bold-easy-cute-animals,Bold & Easy Cute Animals,A,74,テストする（差別化必須）
-2026-08-26,dark-academia-gothic-library,Dark Academia Gothic Library,B,68,見送り（監視継続）
-2026-08-26,spooky-cute-halloween,Spooky Cute (Creepy-Cute),B,64,見送り（Cozy Witch派生に吸収）
-2026-08-26,kawaii-original-character,Kawaii Original-Character Coloring,B,60,見送り（IP競合のため）
+date,theme_id,theme_name_en,rank,opportunity_score,momentum_score,confidence,trend_stage,decision,sources_count,velocity_alert,saturation_alert,seasonal,notes
+2026-08-26,cozy-kitchen-witch,Cozy Kitchen Witch,1,87,,High,2,BUILD_NOW,4,false,false,false,baseline snapshot (schema v2.0 migration)
+2026-08-26,grandmacore-cottage,Grandmacore Cottage Coloring,2,85,,Low,1,BUILD_NOW,1,false,false,false,baseline snapshot; BUILD_NOW despite Low confidence because signal is official Pinterest data
+2026-08-26,cozy-cafe-bookstore,Cozy Cafe & Bookstore Series,3,84,,Medium,3,BUILD_NOW,2,false,false,false,baseline snapshot (schema v2.0 migration)
+2026-08-26,capybara-cottagecore,Capybara Cozy & Cottagecore,4,79,,Medium,3,TEST,3,false,false,false,baseline snapshot (schema v2.0 migration)
+2026-08-26,cottagecore-mushroom-garden,Cottagecore Mushroom & Garden,5,77,,Medium,3,TEST,3,false,false,false,baseline snapshot (schema v2.0 migration)
+2026-08-26,grayscale-photorealistic,Grayscale Photorealistic Nature & Animals,6,76,,Medium,2,TEST,2,false,false,false,baseline snapshot (schema v2.0 migration)
+2026-08-26,bold-easy-cute-animals,Bold & Easy Cute Animals,7,74,,Medium,5,TEST,3,false,true,false,baseline snapshot; mature/saturated single-genre
+2026-08-26,dark-academia-gothic-library,Dark Academia Gothic Library,8,68,,Low,2,WATCH,1,false,true,false,baseline snapshot; competitor surge observed on Amazon
+2026-08-26,spooky-cute-halloween,Spooky Cute (Creepy-Cute),9,64,,Medium,3,AVOID,2,false,false,true,baseline snapshot; seasonal, folded into Cozy Kitchen Witch Halloween line
+2026-08-26,kawaii-original-character,Kawaii Original-Character Coloring,10,60,,Medium,4,AVOID,2,false,true,false,baseline snapshot; IP-adjacent demand, hard to differentiate cleanly

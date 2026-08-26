@@ -1,0 +1,128 @@
+{
+  "system_name": "coloring-trend-research",
+  "version": "1.0.0",
+  "last_updated": "2026-08-26",
+  "purpose": "Detect coloring-book themes whose demand is starting to rise, before competition saturates them. NOT to rank currently-popular themes.",
+
+  "schedule": {
+    "cron_utc": "10 0 * * 1",
+    "human_readable": "毎週月曜 09:10 JST (= 毎週月曜 00:10 UTC)",
+    "note": "cronはUTC基準。JSTからUTCへの変換は 'JST - 9時間'。時刻を変更する場合は .github/workflows/coloring-trend-research.yml の cron 行と、このファイルの cron_utc / human_readable を両方更新すること。",
+    "manual_trigger": "workflow_dispatch で常時手動実行可能"
+  },
+
+  "markets": [
+    { "id": "amazon", "label": "Amazon (KDP coloring books)", "raw_dir": "research/raw/amazon" },
+    { "id": "etsy", "label": "Etsy (Printable Coloring Pages)", "raw_dir": "research/raw/etsy" },
+    { "id": "pinterest", "label": "Pinterest (aesthetic / world-view trends)", "raw_dir": "research/raw/pinterest" },
+    { "id": "google_trends", "label": "Google Trends", "raw_dir": "research/raw/google-trends" },
+    { "id": "social", "label": "TikTok / Instagram", "raw_dir": "research/raw/social" },
+    { "id": "google", "label": "Google Search (general)", "raw_dir": "research/raw/google" }
+  ],
+
+  "trend_stages": {
+    "0": "兆候なし",
+    "1": "SNS・Pinterest等で芽が出始める",
+    "2": "Etsy等で商品需要が発生",
+    "3": "Amazonでも商品が増加",
+    "4": "競合急増",
+    "5": "成熟",
+    "6": "衰退"
+  },
+  "target_stages_for_build_now": [1, 2, 3],
+  "priority_stage": 2,
+
+  "opportunity_score_weights": {
+    "demand": 25,
+    "growth": 25,
+    "competition_room": 20,
+    "cover_appeal": 10,
+    "ai_fit": 10,
+    "series_potential": 10,
+    "total": 100
+  },
+
+  "momentum_score": {
+    "range": [0, 100],
+    "inputs": [
+      "week_over_week_change",
+      "new_product_count_increase",
+      "new_review_increase",
+      "pinterest_or_sns_increase",
+      "google_trends_direction",
+      "etsy_demand_increase"
+    ],
+    "note": "初回実行時（前回データなし）は momentum_score = null (N/A) とし、'比較対象なし・観測開始' と明記する。"
+  },
+
+  "confidence_levels": {
+    "High": "5市場前後で独立に裏付けが取れている",
+    "Medium": "2〜3市場で確認できている",
+    "Low": "SNS等1市場のみ、または二次情報のみ"
+  },
+
+  "decision_categories": {
+    "BUILD_NOW": {
+      "label": "今すぐ作る",
+      "guideline_thresholds": {
+        "opportunity_score_min": 80,
+        "momentum_score_min": 70,
+        "confidence_min": "Medium",
+        "requires_multi_market": true,
+        "requires_low_ip_risk": true,
+        "requires_ai_feasible": true
+      },
+      "note": "機械的な足切りにしない。しきい値を満たさなくてもBUILD NOWにする、または満たしてもBUILD NOWにしない場合は理由を明記すること。"
+    },
+    "TEST": { "label": "小さくテストする" },
+    "WATCH": { "label": "監視継続" },
+    "AVOID": { "label": "見送る" }
+  },
+
+  "alerts": {
+    "velocity_alert": {
+      "label": "🚨 VELOCITY ALERT",
+      "triggers_examples": [
+        "前週圏外 → 今週TOP10入り",
+        "確認市場数が2→4以上に拡大",
+        "Google Trendsが明確に急上昇",
+        "新商品が短期間に複数登場",
+        "新商品なのにレビュー増加が速い",
+        "Etsyでの兆候がAmazonへ波及"
+      ]
+    },
+    "saturation_alert": {
+      "label": "⚠️ SATURATION ALERT",
+      "triggers_examples": [
+        "類似商品が短期間に急増",
+        "大手ブランドの寡占が進んでいる兆候",
+        "参入タイミングとして遅い可能性"
+      ]
+    }
+  },
+
+  "seasonal_keywords": ["Halloween", "Christmas", "Easter", "Valentine's Day", "Summer", "Back to School", "Thanksgiving", "New Year"],
+
+  "ip_risk_blocklist": [
+    "Disney", "Pixar", "Pokémon", "Pokemon", "Sanrio", "Hello Kitty", "Kuromi", "My Melody",
+    "Nintendo", "Mario", "Zelda", "Marvel", "DC Comics", "Star Wars", "Harry Potter",
+    "Studio Ghibli", "Barbie", "Peppa Pig", "Paw Patrol", "Bluey"
+  ],
+  "ip_risk_note": "上記ブランド名・既存キャラクター名を含む商品案、または特定作家/ブランドの画風を模倣する企画は提案しない。オリジナルの世界観・キャラクターのみ提案する。",
+
+  "anti_fabrication_rule": "BSR、レビュー数、売上、検索数、Pinterest保存数、TikTok再生数、Etsy販売数などを推測で作成することを禁止する。確認できない場合は必ず N/A とし、'取得不能 / 理由 / 代替情報源 / 信頼度への影響' を記録する。",
+
+  "product_ideation_required_fields": [
+    "english_titles_x10", "subtitles_x5", "cover_concepts_x5", "interior_ideas_x30",
+    "series_expansions_x10", "target_user", "purchase_motivation",
+    "amazon_keywords", "etsy_keywords", "pinterest_keywords",
+    "differentiation_points", "ng_ideas"
+  ],
+
+  "cost_controls": {
+    "max_turns": 60,
+    "job_timeout_minutes": 45,
+    "concurrency_group": "coloring-trend-weekly-research",
+    "cancel_in_progress": false
+  }
+}
