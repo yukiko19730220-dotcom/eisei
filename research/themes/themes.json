@@ -1,0 +1,182 @@
+{
+  "research_date": "2026-08-26",
+  "market": "US/UK/CA/AU (English-speaking, Amazon KDP + Etsy Printables focus)",
+  "methodology_note": "WebFetch access to amazon.com, etsy.com, pinterest.com, trends.google.com, tiktok.com, reddit.com and several third-party blogs was blocked by the session's network egress policy in this environment. Findings below are based on WebSearch snippets/summaries, one purpose-built Pinterest research artifact, and publicly reported facts only. No sales figures, review counts, or rankings were invented; unverifiable claims are flagged as such in the raw research files under research/raw/.",
+  "themes": [
+    {
+      "theme_id": "cozy-kitchen-witch",
+      "name_en": "Cozy Kitchen Witch",
+      "name_ja": "コージー・キッチンウィッチ（ハーブ薬草魔女）",
+      "rank": "S",
+      "score": 87,
+      "subscores": { "demand": 22, "growth": 24, "competition_room": 15, "visual_appeal": 9, "ai_fit": 9, "series_potential": 8 },
+      "decision": "今すぐ作る",
+      "evidence_markets": ["amazon", "etsy", "pinterest", "sns"],
+      "key_signal": "Pinterest Hobbies Trend Report 2026: herbal apothecary +595%; Practical Magic 2 movie release Sept 2026 as timing catalyst",
+      "sources": [
+        "https://www.amazon.com/Cozy-Witch-Life-Featuring-Relaxation/dp/B0H5TJM2J3",
+        "https://www.etsy.com/listing/1644754396/witch-cats-coloring-pages-forest",
+        "pinterest-research-artifact"
+      ]
+    },
+    {
+      "theme_id": "grandmacore-cottage",
+      "name_en": "Grandmacore Cottage Coloring",
+      "name_ja": "グランマコア（おばあちゃんの台所・編み物・刺繍世界観）",
+      "rank": "S",
+      "score": 85,
+      "subscores": { "demand": 18, "growth": 24, "competition_room": 19, "visual_appeal": 8, "ai_fit": 8, "series_potential": 8 },
+      "decision": "今すぐ作る",
+      "evidence_markets": ["pinterest"],
+      "key_signal": "Pinterest Spring Trend Report 2026: grandma core kitchen +545%, dark cottagecore kitchen +915%. Almost no dedicated Amazon/Etsy coloring products found yet.",
+      "sources": ["pinterest-research-artifact"]
+    },
+    {
+      "theme_id": "cozy-cafe-bookstore",
+      "name_en": "Cozy Cafe & Bookstore Series",
+      "name_ja": "コージー・カフェ＆ブックストア",
+      "rank": "S",
+      "score": 84,
+      "subscores": { "demand": 23, "growth": 19, "competition_room": 14, "visual_appeal": 9, "ai_fit": 9, "series_potential": 10 },
+      "decision": "今すぐ作る",
+      "evidence_markets": ["amazon", "etsy"],
+      "key_signal": "Multiple independent Amazon and Etsy listings for cozy bakery/bookstore/coffee shop themes; strong horizontal series potential.",
+      "sources": [
+        "https://www.amazon.com/Cozy-Bakery-Coloring-Book-Collection/dp/B0H94562C8",
+        "https://www.amazon.com/dp/B0GW8DNHL2",
+        "https://www.etsy.com/listing/4460164126/cozy-bookshop-library-coloring-pages-for",
+        "https://www.etsy.com/listing/1701512480/40-storefront-coloring-pages-bookstore"
+      ]
+    },
+    {
+      "theme_id": "capybara-cottagecore",
+      "name_en": "Capybara Cozy & Cottagecore",
+      "name_ja": "カピバラ×コージー／コテージコア",
+      "rank": "A",
+      "score": 79,
+      "subscores": { "demand": 19, "growth": 17, "competition_room": 13, "visual_appeal": 9, "ai_fit": 9, "series_potential": 8 },
+      "decision": "テストする",
+      "evidence_markets": ["amazon", "etsy", "sns"],
+      "key_signal": "Present across Amazon, Etsy and referenced as a TikTok/character animal trend, but no independent Google Trends or Pinterest official confirmation found.",
+      "sources": [
+        "https://www.amazon.com/Cozy-Capybara-Coloring-Book-Cottagecore/dp/B0GCDB1ST9",
+        "https://www.etsy.com/market/capybara_coloring_pages_printable"
+      ]
+    },
+    {
+      "theme_id": "cottagecore-mushroom-garden",
+      "name_en": "Cottagecore Mushroom & Garden",
+      "name_ja": "コテージコア・きのこ＆ガーデン",
+      "rank": "A",
+      "score": 77,
+      "subscores": { "demand": 19, "growth": 15, "competition_room": 14, "visual_appeal": 9, "ai_fit": 9, "series_potential": 8 },
+      "decision": "テストする",
+      "evidence_markets": ["amazon", "etsy", "pinterest"],
+      "key_signal": "Broad established base across Amazon/Etsy; Pinterest garden inspiration ideas +940% (general gardening, not coloring-specific).",
+      "sources": [
+        "https://www.amazon.com/Cottagecore-Coloring-Book-Wildflowers-Lifestyle/dp/1646042360",
+        "https://www.etsy.com/market/cottagecore_coloring_book"
+      ]
+    },
+    {
+      "theme_id": "grayscale-photorealistic",
+      "name_en": "Grayscale Photorealistic Nature & Animals",
+      "name_ja": "グレイスケール写実調ネイチャー＆動物塗り絵",
+      "rank": "A",
+      "score": 76,
+      "subscores": { "demand": 16, "growth": 20, "competition_room": 16, "visual_appeal": 8, "ai_fit": 7, "series_potential": 8 },
+      "decision": "テストする",
+      "evidence_markets": ["amazon", "etsy"],
+      "key_signal": "Independently flagged by KDP niche blogs AND Etsy's own eRank blog as the fastest-growing adult niche for 2026; less saturated than line-art, but harder to mass-produce consistently with AI (lower AI-fit score).",
+      "sources": [
+        "https://www.amazon.com/Grayscale-Wildlife-Photorealistic-Mindfulness-Relaxation/dp/B0HF6CD5ZK",
+        "https://help.erank.com/blog/etsy-trends-2026/"
+      ]
+    },
+    {
+      "theme_id": "bold-easy-cute-animals",
+      "name_en": "Bold & Easy Cute Animals",
+      "name_ja": "ボールド＆イージー・キュートアニマル",
+      "rank": "A",
+      "score": 74,
+      "subscores": { "demand": 22, "growth": 12, "competition_room": 9, "visual_appeal": 9, "ai_fit": 10, "series_potential": 9 },
+      "decision": "テストする（差別化必須）",
+      "evidence_markets": ["amazon", "etsy", "sns"],
+      "key_signal": "Established, high-demand, cross-market style reported by BookRiot as an actual industry controversy (proof of real market weight). Heavily saturated; must be paired with a specific micro-theme to differentiate.",
+      "sources": ["https://bookriot.com/bold-and-cozy-coloring-coco-wyo-controversies/"]
+    },
+    {
+      "theme_id": "dark-academia-gothic-library",
+      "name_en": "Dark Academia Gothic Library",
+      "name_ja": "ダークアカデミア・ゴシック図書館",
+      "rank": "B",
+      "score": 68,
+      "subscores": { "demand": 13, "growth": 14, "competition_room": 13, "visual_appeal": 9, "ai_fit": 9, "series_potential": 10 },
+      "decision": "見送り（監視継続）",
+      "evidence_markets": ["amazon"],
+      "key_signal": "Low competition per KDP blogs, but multiple similar Amazon products launched within a few months in 2026 — early sign of the niche filling up quickly. No Pinterest/SNS confirmation.",
+      "sources": ["kdpeasy.com (summary only, fetch blocked)"]
+    },
+    {
+      "theme_id": "spooky-cute-halloween",
+      "name_en": "Spooky Cute (Creepy-Cute)",
+      "name_ja": "スプーキーキュート（クリーピーキュート）",
+      "rank": "B",
+      "score": 64,
+      "subscores": { "demand": 15, "growth": 12, "competition_room": 12, "visual_appeal": 9, "ai_fit": 9, "series_potential": 7 },
+      "decision": "見送り（Cozy Witchの季節派生として吸収）",
+      "evidence_markets": ["etsy", "sns"],
+      "key_signal": "Real Etsy listings exist; TikTok 'cute horror/cutegore' aesthetic referenced, but strongly seasonal (Halloween window) with no evergreen path of its own.",
+      "sources": ["https://www.etsy.com/listing/1862755492/spooky-cutie-creepy-creature-coloring"]
+    },
+    {
+      "theme_id": "kawaii-original-character",
+      "name_en": "Kawaii Original-Character Coloring",
+      "name_ja": "オリジナルキャラクター・カワイイ塗り絵",
+      "rank": "B",
+      "score": 60,
+      "subscores": { "demand": 17, "growth": 10, "competition_room": 8, "visual_appeal": 9, "ai_fit": 9, "series_potential": 7 },
+      "decision": "見送り（Sanrio等IP寄せは禁止方針のため差別化困難）",
+      "evidence_markets": ["amazon", "etsy"],
+      "key_signal": "Established demand tied to character-goods culture (Sanrio etc.), but the demand is largely IP-driven; original kawaii characters face high competition without infringing on existing IP.",
+      "sources": ["https://www.penguinrandomhouseretail.com/2025/02/05/relax-with-cute-cozy-coloring-books/"]
+    }
+  ],
+  "blue_ocean_candidates": [
+    {
+      "theme": "Grandmacore Kitchen & Cottage Coloring",
+      "signal": "Pinterest公式: grandma core kitchen +545%, dark cottagecore kitchen +915%",
+      "amazon_competition": "ほぼ皆無（塗り絵カテゴリでの専用商品は未確認）",
+      "other_market_demand": "Pinterest強、Etsy萌芽段階",
+      "verdict": "有望（Sランクにも採用）"
+    },
+    {
+      "theme": "Kitchen Witch / Herbal Apothecary Coloring",
+      "signal": "Pinterest公式 herbal apothecary +595%、映画Practical Magic 2(2026年9月)タイアップ",
+      "amazon_competition": "witch単体は存在するがkitchen witch特化は少ない",
+      "other_market_demand": "Pinterest強",
+      "verdict": "有望・季節タイミング重要（Sランクにも採用）"
+    },
+    {
+      "theme": "Grayscale Photorealistic Animal/Nature Coloring",
+      "signal": "複数のKDP・Etsyニッチブログが独立に急成長ニッチと指摘",
+      "amazon_competition": "線画型より少ないが増加中",
+      "other_market_demand": "業界内で一致するが一次データなし",
+      "verdict": "テスト価値あり（Aランクにも採用）"
+    },
+    {
+      "theme": "Dark Academia Gothic Library Coloring",
+      "signal": "KDPブログの低競合指摘＋Amazon新刊が数ヶ月で複数投入",
+      "amazon_competition": "少ないが急増中",
+      "other_market_demand": "Pinterest/SNS未確認",
+      "verdict": "早期参入価値あり、要監視（Bランク・見送りだが要ウォッチ）"
+    },
+    {
+      "theme": "Analog Lifestyle / Digital-Detox Ritual Coloring (tea rituals, journaling, slow living)",
+      "signal": "デジタルデトックス文化トレンド（Psychology Today, HealthyWayNet等）",
+      "amazon_competition": "ほぼ皆無、cozy系に一部内包のみ",
+      "other_market_demand": "ライフスタイル記事で裏付け強、SNS個別確認なし",
+      "verdict": "コンセプト先行のテスト候補"
+    }
+  ]
+}
