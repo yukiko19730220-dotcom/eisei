@@ -1,24 +1,30 @@
 {
   "system_name": "coloring-trend-research",
-  "version": "1.0.0",
-  "last_updated": "2026-08-26",
-  "purpose": "Detect coloring-book themes whose demand is starting to rise, before competition saturates them. NOT to rank currently-popular themes.",
+  "version": "1.1.0",
+  "last_updated": "2026-08-27",
+  "purpose": "Detect product themes (coloring books, stickers, and future categories) whose demand is starting to rise, before competition saturates them. NOT to rank currently-popular themes.",
+  "categories": ["coloring", "sticker"],
+  "module_history": [
+    { "date": "2026-08-26", "change": "coloring module launched (baseline research + automation system)" },
+    { "date": "2026-08-27", "change": "sticker module added (config/prompts/history extended additively; existing coloring config/fields left unchanged for backward compatibility with prompts/weekly-research.md). Obsidian integration and local-scheduler wiring intentionally deferred to a future session on the user's own machine." }
+  ],
 
   "schedule": {
     "cron_utc": "10 0 * * 1",
     "human_readable": "毎週月曜 09:10 JST (= 毎週月曜 00:10 UTC)",
-    "note": "cronはUTC基準。JSTからUTCへの変換は 'JST - 9時間'。時刻を変更する場合は .github/workflows/coloring-trend-research.yml の cron 行と、このファイルの cron_utc / human_readable を両方更新すること。",
-    "manual_trigger": "workflow_dispatch で常時手動実行可能"
+    "note": "cronはUTC基準。JSTからUTCへの変換は 'JST - 9時間'。時刻を変更する場合は .github/workflows/coloring-trend-research.yml の cron 行と、このファイルの cron_utc / human_readable を両方更新すること。現時点でこのスケジュール済みワークフローが自動実行するのは塗り絵モジュール(prompts/weekly-research.md)のみ。ステッカーモジュール(prompts/sticker-research.md)はまだGitHub Actionsに接続されていない(手動実行のみ想定)。",
+    "manual_trigger": "workflow_dispatch で常時手動実行可能(塗り絵モジュールのみ、現時点)"
   },
 
   "markets": [
-    { "id": "amazon", "label": "Amazon (KDP coloring books)", "raw_dir": "research/raw/amazon" },
-    { "id": "etsy", "label": "Etsy (Printable Coloring Pages)", "raw_dir": "research/raw/etsy" },
-    { "id": "pinterest", "label": "Pinterest (aesthetic / world-view trends)", "raw_dir": "research/raw/pinterest" },
+    { "id": "amazon", "label": "Amazon (coloring books + sticker packs)", "raw_dir": "research/raw/amazon" },
+    { "id": "etsy", "label": "Etsy (Printables + Stickers, especially important for the sticker module)", "raw_dir": "research/raw/etsy" },
+    { "id": "pinterest", "label": "Pinterest (aesthetic / world-view trends, shared across categories)", "raw_dir": "research/raw/pinterest" },
     { "id": "google_trends", "label": "Google Trends", "raw_dir": "research/raw/google-trends" },
     { "id": "social", "label": "TikTok / Instagram", "raw_dir": "research/raw/social" },
     { "id": "google", "label": "Google Search (general)", "raw_dir": "research/raw/google" }
   ],
+  "raw_file_naming": "research/raw/<market>/<date>-<market>-<category>-research.md (例: 2026-08-27-etsy-sticker-research.md)。同じmarketフォルダをcoloring/stickerで共有し、ファイル名のcategoryサフィックスで区別する(共通トレンドエンジンの思想:同じ市場を二重調査しない)。",
 
   "trend_stages": {
     "0": "兆候なし",
@@ -33,6 +39,7 @@
   "priority_stage": 2,
 
   "opportunity_score_weights": {
+    "_scope": "coloring module only (prompts/weekly-research.md). Kept unchanged/unrenamed for backward compatibility.",
     "demand": 25,
     "growth": 25,
     "competition_room": 20,
@@ -41,6 +48,46 @@
     "series_potential": 10,
     "total": 100
   },
+
+  "sticker_opportunity_score_weights": {
+    "_scope": "sticker module only (prompts/sticker-research.md).",
+    "demand": 20,
+    "growth": 20,
+    "competition_room": 15,
+    "instant_impact": 15,
+    "set_expandability": 10,
+    "use_case_breadth": 10,
+    "ai_fit": 10,
+    "total": 100
+  },
+
+  "product_fit": {
+    "description": "テーマごとに coloring_fit(0-100) と sticker_fit(0-100) を別々に採点し、その組み合わせから商品形態の優先度を決める。既存の塗り絵専用 themes.json は coloring_fit を明示的に持たない(移行前のため)。今後coloring_fitも付与していく。",
+    "categories": {
+      "COLORING_FIRST": "塗り絵を優先して作る",
+      "STICKER_FIRST": "ステッカーを優先して作る",
+      "BOTH": "両方作る価値がある",
+      "WATCH": "監視継続、まだどちらも時期尚早",
+      "AVOID": "見送る"
+    }
+  },
+  "coloring_fit_criteria": [
+    "30〜50ページ以上に展開できるか",
+    "同じ世界観を保ったままバリエーションを維持できるか",
+    "表紙でクリックを取れるか",
+    "大人向け/子供向けどちらが適するか",
+    "Bold & Easy/Cozyとの相性",
+    "シリーズ・季節展開のしやすさ",
+    "AIで安定生成できるか"
+  ],
+  "sticker_fit_criteria": [
+    "小さいサイズでも意味・可愛さ・面白さが一目で伝わるか",
+    "1テーマから10〜50種類のデザインに展開できるか",
+    "Sticker Pack化・Printable化・Digital Sticker化のどれに向くか",
+    "使用場面の広さ(laptop/planner/journal/water bottle/phone/scrapbook等)",
+    "カラーバリエーション展開のしやすさ",
+    "AIで安定生成できるか"
+  ],
 
   "momentum_score": {
     "range": [0, 100],
@@ -110,6 +157,14 @@
   ],
   "ip_risk_note": "上記ブランド名・既存キャラクター名を含む商品案、または特定作家/ブランドの画風を模倣する企画は提案しない。オリジナルの世界観・キャラクターのみ提案する。",
 
+  "ip_risk_levels": {
+    "LOW": "独自テーマとして安全性が比較的高い",
+    "MEDIUM": "商標・既存ブランド等の追加確認が必要",
+    "HIGH": "商品化候補から原則除外"
+  },
+  "trademark_check_required_label": "TRADEMARK CHECK REQUIRED",
+  "trademark_note": "特にステッカーはフレーズ・スラング系の商品が多く、「売れている言葉」がそのまま自由に使える言葉とは限らない。既存の番組・歌詞・ブランド・インフルエンサー発言などの引用が疑われるフレーズは、安全と断定せず trademark_check_required_label を付与して人間の確認を促す。公的商標データベース等に実際にアクセスして確認できた場合のみ確認済みとして扱い、確認できない場合は「未確認」のままにする。",
+
   "anti_fabrication_rule": "BSR、レビュー数、売上、検索数、Pinterest保存数、TikTok再生数、Etsy販売数などを推測で作成することを禁止する。確認できない場合は必ず N/A とし、'取得不能 / 理由 / 代替情報源 / 信頼度への影響' を記録する。",
 
   "product_ideation_required_fields": [
@@ -117,6 +172,12 @@
     "series_expansions_x10", "target_user", "purchase_motivation",
     "amazon_keywords", "etsy_keywords", "pinterest_keywords",
     "differentiation_points", "ng_ideas"
+  ],
+  "sticker_product_ideation_required_fields": [
+    "theme", "target_customer", "sticker_pack_name", "product_title_ideas_x10",
+    "design_ideas_x10_to_x30", "set_bundling_ideas", "color_variations",
+    "etsy_keywords", "pinterest_keywords", "purchase_desire_messaging",
+    "use_cases", "differentiation_points", "ip_notes"
   ],
 
   "cost_controls": {
