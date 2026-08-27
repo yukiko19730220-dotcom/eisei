@@ -1,0 +1,96 @@
+name: Coloring Book Trend Research (Weekly)
+
+# 塗り絵市場を毎週自動調査し、前回データと比較してレポート・履歴を更新するワークフロー。
+# 詳細な調査ロジックは prompts/weekly-research.md に記述されている。
+# このYAMLはあくまで「いつ・どうやってClaude Codeを起動するか」だけを担当する。
+
+on:
+  schedule:
+    # 毎週月曜 09:10 JST = 毎週月曜 00:10 UTC
+    # 時刻を変更する場合はここと config/research-config.json の schedule.cron_utc を両方更新すること。
+    # 00分ちょうどはGitHub Actions全体で混雑しやすいため、意図的に10分ずらしている。
+    - cron: "10 0 * * 1"
+  workflow_dispatch:
+    inputs:
+      note:
+        description: "任意メモ(例: 特定テーマに注目してほしい等)。空でもOK。"
+        required: false
+        type: string
+
+# 同じ週に複数ジョブが重複実行されないようにする。
+# 2つの実行が重なった場合、後発は先発の完了を待つ(キャンセルしない = レポートを中途半端な状態にしない)。
+concurrency:
+  group: coloring-trend-weekly-research
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # レポート・履歴ファイルをコミット・プッシュするために必要
+  id-token: write    # Claude Code GitHub Action のデフォルト認証(GitHub App)に必要
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    # コスト暴走防止: ジョブ全体のハードタイムアウト
+    timeout-minutes: 45
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # 履歴比較・git logで過去コミットを参照できるようにフル取得
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Prepare research directories (sanity check before Claude runs)
+        run: node scripts/prepare-research.mjs
+
+      - name: Run Claude Code weekly research
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # secrets.ANTHROPIC_API_KEY が無い場合は claude_code_oauth_token を使う運用に切り替えてもよい。
+          # その場合はこの行を削除し、以下を追加する:
+          #   claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            あなたは塗り絵市場監視システムの週次リサーチジョブです。
+
+            まず `prompts/weekly-research.md` を読み、その指示に厳密に従って今週の調査・分析・レポート作成・
+            履歴更新・git commit & push までを最後まで実行してください。指示書の内容が最優先の作業指示です。
+
+            補足コンテキスト:
+            - 今日の日付(UTC): ${{ github.event.repository.updated_at }} ではなく、必ず `date -u +%F` 等で実行時点の
+              実際の日付を自分で取得して使うこと(ワークフロー実行日と一致させる)。
+            - このジョブは GitHub Actions のスケジュール実行、または手動 workflow_dispatch です。
+            - 手動実行時の補足メモ: "${{ github.event.inputs.note }}"
+            - `config/research-config.json` に採点基準・しきい値・市場一覧・IPリスクブロックリストが定義されている。
+              必ず読み込んで従うこと。
+            - `scripts/prepare-research.mjs` (ディレクトリ準備・現状確認)、`scripts/compare-history.mjs`
+              (前回データとの差分計算)、`scripts/validate-output.mjs` (成果物の最終チェック) が用意されている。
+              自分で全部手作業でやろうとせず、これらのスクリプトを Bash から実行して活用すること。
+            - 数字の捏造は絶対禁止。取得できない場合は N/A とし、理由を記録すること。
+            - 過去のレポート・履歴ファイルは絶対に上書き・削除しないこと(新しい日付のファイルを追加する)。
+            - 最後に、変更したファイルを git add し、
+              `research: weekly coloring trend report YYYY-MM-DD` という形式のコミットメッセージで
+              コミットし、現在のブランチに push すること(コミット前に `git config user.name` /
+              `user.email` を設定すること)。
+
+          claude_args: |
+            --max-turns 60
+            --model claude-sonnet-5
+            --allowedTools "Read,Write,Edit,Bash,Glob,Grep,WebSearch,WebFetch"
+
+      - name: Validate this week's output (independent final check)
+        run: node scripts/validate-output.mjs --date "$(date -u +%F)"
+
+      - name: Upload run artifacts for debugging
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coloring-trend-research-${{ github.run_id }}
+          path: |
+            research/reports
+            logs
+          retention-days: 30
