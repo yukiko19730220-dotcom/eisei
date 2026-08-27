@@ -29,3 +29,25 @@
   - `ANTHROPIC_API_KEY`(または`CLAUDE_CODE_OAUTH_TOKEN`)のGitHub Secrets登録は未実施(人間側の作業)
   - Claude GitHub App のインストールは未実施(人間側の作業)
   - workflow_dispatchによる実手動テスト実行は、上記2点が完了するまで成功しない見込み
+
+## 2026-08-27 (ステッカーモジュール追加、初回リサーチ)
+- トリガー: 人間からの直接指示(「ステッカーの部分だけこのセッションでやってほしい」。ユーザーがスマホ作業中のため、Obsidian連携・ローカル環境確認・GitHub Actionsへの接続は今回スコープ外とし、次回PC作業時に持ち越し)
+- 実施内容:
+  - `config/research-config.json` を追記拡張(sticker_opportunity_score_weights, product_fit, coloring_fit/sticker_fit評価基準, ip_risk_levels, trademark_note等を追加。既存の塗り絵用フィールドは変更なし)
+  - `prompts/sticker-research.md` を新規作成(weekly-research.mdと同じ思想でステッカー市場調査〜商品企画の指示書。現時点ではGitHub Actions未接続、手動実行専用)
+  - Etsy/Amazon/Pinterest/Google Trends/SNSの5市場を並行調査
+  - `research/themes/stickers.json` を新規作成(TOP10、ブルーオーシャン候補、TRADEMARK CHECK REQUIREDフレーズ一覧、既存IP除外リストを含む)
+  - `research/history/trend-history.csv` / `.json` に `category` 列を追加(既存coloring行はcategory=coloringとして保持、今回のsticker行を追記)
+  - `research/reports/2026-08-27-sticker-weekly-report.md` を作成
+- 成功ソース: Etsy(検索経由)、Amazon(検索経由)、Pinterest公式トレンドレポート(検索経由の要約、一次数値データを含む)、SNS(TikTok/Instagram、検索経由)
+- 失敗ソース: etsy.com/amazon.com/pinterest.com/trends.google.com/tiktok.comへの直接WebFetch(全面ブロック)。Google Trendsは実質的に未確認に終わった(AI生成SEOコンテンツファーム由来の数値は不採用)
+- 検出テーマ数: 10(新規: 10、ステッカーモジュール初回のため全件新規)
+- BUILD NOW: 3件 / TEST: 6件 / WATCH: 1件 / AVOID: 0件
+- IP Risk Alert: Skibidi/Labubu等の既存IPを除外リストに追加。canon event/6-7/Sincerely An Introvert類似表現にTRADEMARK CHECK REQUIREDを付与
+- RESEARCH INCOMPLETE: いいえ
+- 塗り絵モジュールのファイル(`research/themes/themes.json`, 既存の`research/reports/*-trend-report.md`等)への変更なし
+- 未実施・持ち越し事項(ユーザーのPC作業時に対応予定):
+  - Obsidian Vault連携(環境調査含む)
+  - ローカルスケジューラまたはGitHub Actionsへのステッカーモジュール接続
+  - 共通Trend Database(themes.json + stickers.jsonの統合)への本格移行の可否判断
+  - PR作成・mainへのマージ(前回セッションから引き続き未実施)

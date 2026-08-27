@@ -151,6 +151,28 @@ research: weekly coloring trend report YYYY-MM-DD
 `prompts/weekly-research.md` の記述を照らし合わせ、指示の曖昧さやツール権限
 (`--allowedTools`)の不足がないか確認してください。
 
+## ステッカーモジュールについて(2026-08-27追加)
+
+2026-08-27に、塗り絵モジュールと並ぶ第2の商品カテゴリとして**ステッカーモジュール**を追加しました。
+既存の塗り絵モジュール(設定・データ・自動実行)は一切変更していません。
+
+**現状の位置づけ:**
+- 調査ロジック: `prompts/sticker-research.md`(塗り絵の`prompts/weekly-research.md`と同じ構成)
+- 設定: `config/research-config.json` に追記(`sticker_opportunity_score_weights`, `product_fit`,
+  `coloring_fit_criteria` / `sticker_fit_criteria`, `ip_risk_levels`, `trademark_note` 等)
+- データ: `research/themes/stickers.json`(塗り絵の`themes.json`とは別ファイル)、
+  `research/history/trend-history.csv`/`.json` に `category` 列(`coloring`/`sticker`)を追加して共通管理
+- レポート: `research/reports/YYYY-MM-DD-sticker-weekly-report.md`
+- **GitHub Actionsへは未接続**(`.github/workflows/coloring-trend-research.yml` は塗り絵モジュールのみを実行する)。手動実行専用
+- **Obsidian連携は未着手**。Vaultの場所・OS・Git管理状況等はユーザーのローカルPC環境でないと調査できないため、次回PC作業時の対応事項として残しています
+
+**次回PC作業時に決めていただきたいこと:**
+1. Obsidian Vaultをどこに置いているか(パス)、Gitで管理しているか
+2. ステッカーモジュールを自動実行する場合、塗り絵と同じワークフローに統合するか、別ワークフローにするか
+3. `themes.json`(塗り絵)と`stickers.json`(ステッカー)を将来的に1つの共通Trend Databaseへ統合するかどうか
+
+いずれも、指示書(元の統合指示書)には「既存資産を把握するまで大規模変更を始めない」「勝手に推測パスへ書き込まない」という原則があるため、今回は意図的に着手していません。
+
 ## ディレクトリ構成
 
 ```

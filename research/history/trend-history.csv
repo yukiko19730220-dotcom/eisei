@@ -1,11 +1,21 @@
-date,theme_id,theme_name_en,rank,opportunity_score,momentum_score,confidence,trend_stage,decision,sources_count,velocity_alert,saturation_alert,seasonal,notes
-2026-08-26,cozy-kitchen-witch,Cozy Kitchen Witch,1,87,,High,2,BUILD_NOW,4,false,false,false,baseline snapshot (schema v2.0 migration)
-2026-08-26,grandmacore-cottage,Grandmacore Cottage Coloring,2,85,,Low,1,BUILD_NOW,1,false,false,false,baseline snapshot; BUILD_NOW despite Low confidence because signal is official Pinterest data
-2026-08-26,cozy-cafe-bookstore,Cozy Cafe & Bookstore Series,3,84,,Medium,3,BUILD_NOW,2,false,false,false,baseline snapshot (schema v2.0 migration)
-2026-08-26,capybara-cottagecore,Capybara Cozy & Cottagecore,4,79,,Medium,3,TEST,3,false,false,false,baseline snapshot (schema v2.0 migration)
-2026-08-26,cottagecore-mushroom-garden,Cottagecore Mushroom & Garden,5,77,,Medium,3,TEST,3,false,false,false,baseline snapshot (schema v2.0 migration)
-2026-08-26,grayscale-photorealistic,Grayscale Photorealistic Nature & Animals,6,76,,Medium,2,TEST,2,false,false,false,baseline snapshot (schema v2.0 migration)
-2026-08-26,bold-easy-cute-animals,Bold & Easy Cute Animals,7,74,,Medium,5,TEST,3,false,true,false,baseline snapshot; mature/saturated single-genre
-2026-08-26,dark-academia-gothic-library,Dark Academia Gothic Library,8,68,,Low,2,WATCH,1,false,true,false,baseline snapshot; competitor surge observed on Amazon
-2026-08-26,spooky-cute-halloween,Spooky Cute (Creepy-Cute),9,64,,Medium,3,AVOID,2,false,false,true,baseline snapshot; seasonal, folded into Cozy Kitchen Witch Halloween line
-2026-08-26,kawaii-original-character,Kawaii Original-Character Coloring,10,60,,Medium,4,AVOID,2,false,true,false,baseline snapshot; IP-adjacent demand, hard to differentiate cleanly
+date,category,theme_id,theme_name_en,rank,opportunity_score,momentum_score,confidence,trend_stage,decision,sources_count,velocity_alert,saturation_alert,seasonal,notes
+2026-08-26,coloring,cozy-kitchen-witch,Cozy Kitchen Witch,1,87,,High,2,BUILD_NOW,4,false,false,false,baseline snapshot (schema v2.0 migration)
+2026-08-26,coloring,grandmacore-cottage,Grandmacore Cottage Coloring,2,85,,Low,1,BUILD_NOW,1,false,false,false,baseline snapshot; BUILD_NOW despite Low confidence because signal is official Pinterest data
+2026-08-26,coloring,cozy-cafe-bookstore,Cozy Cafe & Bookstore Series,3,84,,Medium,3,BUILD_NOW,2,false,false,false,baseline snapshot (schema v2.0 migration)
+2026-08-26,coloring,capybara-cottagecore,Capybara Cozy & Cottagecore,4,79,,Medium,3,TEST,3,false,false,false,baseline snapshot (schema v2.0 migration)
+2026-08-26,coloring,cottagecore-mushroom-garden,Cottagecore Mushroom & Garden,5,77,,Medium,3,TEST,3,false,false,false,baseline snapshot (schema v2.0 migration)
+2026-08-26,coloring,grayscale-photorealistic,Grayscale Photorealistic Nature & Animals,6,76,,Medium,2,TEST,2,false,false,false,baseline snapshot (schema v2.0 migration)
+2026-08-26,coloring,bold-easy-cute-animals,Bold & Easy Cute Animals,7,74,,Medium,5,TEST,3,false,true,false,baseline snapshot; mature/saturated single-genre
+2026-08-26,coloring,dark-academia-gothic-library,Dark Academia Gothic Library,8,68,,Low,2,WATCH,1,false,true,false,baseline snapshot; competitor surge observed on Amazon
+2026-08-26,coloring,spooky-cute-halloween,Spooky Cute (Creepy-Cute),9,64,,Medium,3,AVOID,2,false,false,true,baseline snapshot; seasonal, folded into Cozy Kitchen Witch Halloween line
+2026-08-26,coloring,kawaii-original-character,Kawaii Original-Character Coloring,10,60,,Medium,4,AVOID,2,false,true,false,baseline snapshot; IP-adjacent demand, hard to differentiate cleanly
+2026-08-27,sticker,sticker-book-club-poetcore,Book Club & Poetcore Stationery Stickers,1,88,,Medium,1,BUILD_NOW,1,false,false,false,baseline snapshot (sticker module launch); Pinterest official data (+243%/+558%/+175%)
+2026-08-27,sticker,sticker-coquette-bow,Coquette Bow Sticker Packs,2,85,,Medium,3,BUILD_NOW,2,false,false,false,baseline snapshot (sticker module launch)
+2026-08-27,sticker,sticker-dark-academia,Dark Academia Sticker Packs,3,79,,Medium,3,TEST,2,false,true,false,baseline snapshot; same world-view as coloring's dark-academia-gothic-library, both flagged saturation
+2026-08-27,sticker,sticker-goblincore-mushroom-frog,Goblincore Mushroom & Frog Stickers,4,78,,Medium,2,BUILD_NOW,3,false,false,false,baseline snapshot; overlaps coloring's cottagecore-mushroom-garden, BOTH product_decision
+2026-08-27,sticker,sticker-gimme-gummy,Gimme Gummy (Candy-Glossy) Stickers,5,74,,Low,1,TEST,1,false,false,false,baseline snapshot; Pinterest official trend, no Etsy/Amazon confirmation yet
+2026-08-27,sticker,sticker-curated-clutter-vintage-travel,Curated Clutter / Vintage Travel Sticker Collections,6,72,,Low,1,TEST,1,false,false,false,baseline snapshot; TRADEMARK CHECK REQUIRED for real place/brand imagery
+2026-08-27,sticker,sticker-neurodivergent-community-humor,Neurodivergent / Chronic-Illness Community Humor Stickers,7,70,,Low,2,TEST,1,false,false,false,baseline snapshot; creator-authentic niche, requires respectful representation
+2026-08-27,sticker,sticker-profession-dark-humor,Profession Dark-Humor Stickers (Nurse/Therapist/Teacher),8,68,,Medium,4,TEST,1,false,true,false,baseline snapshot; established/saturated niche, differentiate wording
+2026-08-27,sticker,sticker-capybara,Capybara Sticker Packs,9,65,,Low,3,TEST,1,false,false,false,baseline snapshot; overlaps coloring's capybara-cottagecore
+2026-08-27,sticker,sticker-y2k-holographic,Y2K Holographic / Chrome Finish Packs,10,60,,Low,2,WATCH,1,false,false,false,baseline snapshot; a finish/material trend rather than a standalone theme
