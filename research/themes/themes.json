@@ -114,20 +114,21 @@
       "confidence": "Medium",
       "trend_stage": 3,
       "decision": "TEST",
+      "related_sticker_theme_id": "sticker-goblincore-mushroom-frog",
       "velocity_alert": false,
       "saturation_alert": false,
       "seasonal": false,
       "sources_count": 3,
       "evidence_markets": ["amazon", "etsy", "pinterest"],
       "first_seen_date": "2026-08-26",
-      "last_updated": "2026-08-26",
+      "last_updated": "2026-08-27",
       "subscores": { "demand": 19, "growth": 15, "competition_room": 14, "cover_appeal": 9, "ai_fit": 9, "series_potential": 8 },
       "key_signal": "Broad established base across Amazon/Etsy; Pinterest garden inspiration ideas +940% (general gardening, not coloring-specific).",
       "sources": [
         "https://www.amazon.com/Cottagecore-Coloring-Book-Wildflowers-Lifestyle/dp/1646042360",
         "https://www.etsy.com/market/cottagecore_coloring_book"
       ],
-      "notes": "初回スコアリング(2026-08-26)。"
+      "notes": "初回スコアリング(2026-08-26)。2026-08-27: ステッカーモジュールの深掘り調査で related_sticker_theme_id (`sticker-goblincore-mushroom-frog`) と直結することを確認。塗り絵・ステッカー横断でConfidence Highまで裏付けが強化された8サブニッチ調査あり、詳細は research/themes/stickers.json 参照。"
     },
     {
       "theme_id": "grayscale-photorealistic",

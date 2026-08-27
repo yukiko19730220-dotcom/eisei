@@ -5,6 +5,13 @@
 このレポートは `prompts/sticker-research.md` に基づく**ステッカーモジュールの初回(ベースライン)調査**です。
 `prompts/weekly-research.md`(塗り絵モジュール)のデータ・レポートは一切変更していません。
 
+> **2026-08-27 同日追記**: ユーザーからの追加指示により、TOP3(Book Club & Poetcore / Coquette Bow /
+> Goblincore Mushroom & Frog)を28のサブニッチに分解して深掘り検証しました。その結果、
+> **Coquette Bow は BUILD_NOW → TEST へ格下げ**、**Goblincore/Frog & Mushroom は Confidence Medium → High へ強化**、
+> **Book Club と Poetcore を別テーマとして分離**するなど、いくつかの判定を修正しています。
+> 詳細は「サブニッチ深掘り分析」セクションを参照してください。EXECUTIVE SUMMARY・TOP10・BUILD LISTは
+> この深掘り結果を反映して更新済みです。
+
 ---
 
 ## 0. 調査手法と信頼性についての重要な注意
@@ -24,17 +31,24 @@
 
 ---
 
-## EXECUTIVE SUMMARY
+## EXECUTIVE SUMMARY(2026-08-27 深掘り後・最新版)
 
-- **今週最重要トレンド**: Book Club & Poetcore Stationery Stickers — Pinterest公式実測値(book club stickers検索+243%)という、今回の調査全体で最も確度の高い一次データに基づく
-- **Sticker First TOP3**: ① Book Club & Poetcore Stationery Stickers　② Coquette Bow Sticker Packs　③ Gimme Gummy(Candy-Glossy)Stickers
-- **Coloring First TOP3**: 該当なし(ステッカー適性が塗り絵適性を上回るテーマが大半。強いて挙げれば Capybara Sticker Packs は coloring_fit(79) が sticker_fit(70) をわずかに上回るためColoring Firstに近い)
-- **BOTH TOP3**: ① Dark Academia Sticker Packs　② Goblincore Mushroom & Frog Stickers　③ Capybara Sticker Packs — いずれも既存の塗り絵モジュールで検出済みのテーマと世界観が重なる
-- **BUILD NOW**: Book Club & Poetcore Stationery Stickers、Coquette Bow Sticker Packs、Goblincore Mushroom & Frog Stickers(3件)
-- **TEST**: Dark Academia、Gimme Gummy、Curated Clutter/Vintage Travel、Neurodivergent Community Humor、Profession Dark-Humor、Capybara(6件)
-- **IP Risk Alert**: 「Skibidi」「Labubu」関連は既存IPのため商品化候補から除外(HIGH)。「Curated Clutter/Vintage Travel」は実在地名・ブランド意匠を避ける必要がありTRADEMARK CHECK REQUIRED(MEDIUM)。フレーズでは「canon event」「6-7」「Sincerely An Introvert類似表現」がTRADEMARK CHECK REQUIRED
-- **Saturation Alert**: Dark Academia(塗り絵・ステッカー両方で競合急増の兆候)、Profession Dark-Humor(看護師系ニッチは既に確立済みセラーが多数)
-- **今週見送るべきテーマ**: Y2K Holographic/Chrome Finish(単一出典・独立裏付け弱く、そもそも「世界観」ではなく「仕上げ材質」のトレンドのためWATCH)
+- **今週最重要トレンド**: Frog & Mushroom(Cottagecore/Goblincore)Stickers — 28サブニッチ深掘りの結果、塗り絵・ステッカー双方で実在商品による裏付けが最も強く、Confidence=Highに強化された唯一のテーマ
+- **Sticker First TOP3**: ① Book Club Stickers(事実: +243%)　② Frog & Mushroom(全般)Stickers　③ Reading Journal Stickers
+- **Coloring First TOP3**: 該当なし(Capybara Sticker Packs が coloring_fit(79) > sticker_fit(70) でColoring Firstに最も近い)
+- **BOTH TOP3**: ① Frog & Mushroom / Mushroom Frog / Cottagecore Frog(Goblincoreサブニッチ群)　② Dark Academia Sticker Packs　③ Capybara Sticker Packs
+- **BUILD NOW**: Book Club Stickers、Frog & Mushroom(全般)、Mushroom Frog、Cottagecore Frog(4件、うち3件はGoblincoreサブニッチ)
+- **TEST**: Coquette Bow(格下げ)、Ballet Bow(新規分離)、Poetcore Stationery(新規分離)、Dark Academia、Gimme Gummy、Curated Clutter/Vintage Travel、Neurodivergent Community Humor、Profession Dark-Humor、Capybara、Goblincore(単語)、Cozy Mushroom
+- **IP Risk Alert**: 「Skibidi」「Labubu」は既存IPのため除外(HIGH)。新規発見: 「BookTok」自体がByteDance/TikTokの**登録商標**、「Silent Book Club」も登録商標。カエルモチーフ全般でSanrio「ケロッピ」への意匠寄せに注意(丸い目・赤白ストライプ服の組み合わせを避ける)。「Curated Clutter」「canon event」「6-7」「Sincerely An Introvert類似表現」「Tortured Poets類似表現」がTRADEMARK CHECK REQUIRED(MEDIUM)
+- **Saturation Alert**: **Coquette Bow(基準ニッチのPastel Bowは専門書籍まで出版される成熟度、新規追加)**、Dark Academia、Profession Dark-Humor
+- **今週見送るべきテーマ**: Pastel Bow基準ニッチ・Cherry Bow・Vintage Bow・Romantic Bow・Books & Coffee・Bow & Books(いずれもCoquette/Book Club深掘りでAVOID判定)、Y2K Holographic/Chrome Finish、Forest Creature(単独)
+
+### 優先順位(3大テーマの最終比較)
+評価基準(Momentum/Confidence/競合余地/Sticker Fit/Coloring Fit/IP Risk/商品化スピード/シリーズ展開性)で比較した結果:
+
+**1位: Frog & Mushroom(Cottagecore/Goblincore)** — 3市場確認・Confidence High・BOTH展開・既存塗り絵テーマと直結でシリーズ展開性最強
+**2位: Book Club Stickers** — 唯一の一次事実データ(+243%)・商品化スピードは最速だがColoring Fitが低くステッカー単体
+**3位: Coquette Bow** — 深掘りの結果、基準ニッチは飽和済みと判明しBUILD_NOWから格下げ。Ballet Bow等の細分化のみ限定的価値
 
 ---
 
@@ -42,18 +56,20 @@
 
 | Rank | Theme | Score | Confidence | Trend Stage | Coloring Fit | Sticker Fit | IP Risk | Decision | Priority |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | Book Club & Poetcore Stationery Stickers | 88 | Medium | 1 | 45 | 92 | LOW | BUILD_NOW | Sticker First |
-| 2 | Coquette Bow Sticker Packs | 85 | Medium | 3 | 55 | 90 | LOW | BUILD_NOW | Sticker First |
+| 1 | Book Club Stickers(旧: Book Club & Poetcore) | 88 | Medium | 3 | 35 | 90 | LOW(商標確認要) | BUILD_NOW | Sticker First |
+| 2 | Coquette Bow Sticker Packs | 85 | Medium | 4 | 45 | 78 | LOW | **TEST**(格下げ) | Sticker First |
 | 3 | Dark Academia Sticker Packs | 79 | Medium | 3 | 68 | 82 | LOW | TEST | Both(要監視) |
-| 4 | Goblincore Mushroom & Frog Stickers | 78 | Medium | 2 | 77 | 85 | LOW | BUILD_NOW | Sticker First, Coloring Second |
+| 4 | Frog & Mushroom(Cottagecore/Goblincore)Stickers(旧: Goblincore Mushroom & Frog) | 82 | **High**(強化) | 3 | 82 | 90 | LOW(Keroppi意匠注意) | BUILD_NOW | Sticker First, Coloring Second |
 | 5 | Gimme Gummy(Candy-Glossy)Stickers | 74 | Low | 1 | 30 | 80 | LOW | TEST | Sticker First |
 | 6 | Curated Clutter/Vintage Travel Sticker Collections | 72 | Low | 1 | 40 | 78 | MEDIUM | TEST | Sticker First(商標確認必須) |
 | 7 | Neurodivergent/Chronic-Illness Community Humor | 70 | Low | 2 | 20 | 75 | LOW | TEST | Sticker First |
 | 8 | Profession Dark-Humor(Nurse/Therapist/Teacher) | 68 | Medium | 4 | 15 | 72 | LOW | TEST | Sticker First |
 | 9 | Capybara Sticker Packs | 65 | Low | 3 | 79 | 70 | LOW | TEST | Coloring First, Sticker Second |
 | 10 | Y2K Holographic/Chrome Finish Packs | 60 | Low | 2 | 10 | 65 | LOW | WATCH | 監視継続 |
+| 11(新規) | Poetcore Stationery Stickers | 62 | Low | 1 | 55 | 75 | MEDIUM(商標確認要) | TEST | Sticker First |
+| 12(新規) | Balletcore Bow Sticker Packs | 63 | Low | 2 | 30 | 75 | LOW | TEST | Sticker First |
 
-各テーマの詳細な市場状況・スコア内訳・出典は `research/themes/stickers.json` を参照。
+各テーマの詳細な市場状況・スコア内訳・出典は `research/themes/stickers.json` を参照。11位・12位は今回の深掘りで新たに独立テーマとして分離したもの。
 
 ### 各テーマの補足
 
@@ -89,6 +105,46 @@ TikTokでDIYカピバラステッカー動画がCraftTok文脈でバイラル化
 
 ---
 
+## サブニッチ深掘り分析(2026-08-27 同日追加、ユーザー指示による)
+
+TOP3テーマ(Book Club & Poetcore / Coquette Bow / Goblincore Mushroom & Frog)について、
+28のサブニッチに分解して個別検証しました。詳細な生データは
+`research/raw/deep-dive/2026-08-27-*-subniche.md` を、構造化データは
+`research/themes/stickers.json` の各テーマの `sub_niches` 配列を参照してください。
+
+### ① Book Club & Poetcore → 「Book Club」と「Poetcore」を分離
+
+**重要: 事実と仮説の区別**
+- 【事実】"book club stickers"検索 **+243%**、"book club crafts" +558%、"book club invitations" +173%、"book club hosting" +87%(いずれもPinterest Summer Trend Report 2025公式実測値)
+- 【事実、ただし別トレンド】"the poet aesthetic"検索 +175%、"poet core"検索 +75%(Pinterest Predicts 2026、**ファッション/アパレル文脈の数値であり、Poetcore自体が+243%だったわけではない**)
+- 【仮説】上記2つの世界観が隣接するため、Poetcoreのステッカー需要も伸びる可能性がある(未検証)
+
+10サブニッチの判定: **BUILD_NOW**=Book Club(中核サブニッチ)／**TEST**=Poetcore・Reading Journal・Dark Academia／**WATCH**=Bookish・Poetry・Library・Literary Girl・Book Club Night／**AVOID**=Books & Coffee(既に飽和)。
+
+**新規IPリスク発見**: 「BookTok」はByteDance/TikTokの**登録商標**(米国登録番号7989376)。「Silent Book Club」もUSPTO登録商標。商品名・タグとしてそのまま使用しないこと。「Hot Girls Read」という類似フレーズが商標出願→コミュニティの反発で撤回された事例もあり、ブッキッシュ・スラングの独占的商標化は評判リスクも伴う。
+
+→ Book Clubは `sticker-book-club-poetcore`(theme_id維持、名称のみ更新)としてBUILD_NOW継続。Poetcoreは仮説段階のため新規theme_id `sticker-poetcore-stationery` として分離しTEST判定。
+
+### ② Coquette Bow → 基準ニッチの飽和が判明、BUILD_NOW→TESTへ格下げ
+
+Amazon上に**『Coquette Stickers: 500+ Frilly, Flirty, and Feminine Stickers』(Adams Media刊)という専門書籍**が既に出版されているレベルで基準ニッチ(Pastel Bow)が成熟していることが判明。「需要はあるが競合が強い場合はBUILD_NOWにしない」というユーザー指示に基づき、`sticker-coquette-bow` 全体の判定を **BUILD_NOW → TEST** に修正し、`saturation_alert: true` を追加しました。
+
+10サブニッチの判定: **TEST**=Bookish Coquette・Dark Coquette・Cherry Bow(弱)・Ballet Bow(最有力)／**WATCH**=Bridal Bow(商品形態が異なる)・French Coquette(判断材料不足)／**AVOID**=Vintage Bow・Pastel Bow(基準、飽和)・Romantic Bow・Bow & Books(Bookish Coquetteに統合)。
+
+最も差別化しやすいのは**Ballet Bow**(balletcoreというファッション上流トレンドは伸びているが、ステッカー特化での供給がまだ薄い)。ただしConfidence Low〜Mediumのため、新規theme_id `sticker-ballet-bow` として小ロットTESTを推奨。
+
+### ③ Goblincore / Mushroom & Frog → Confidence Medium→Highへ強化、塗り絵との内部リンク確立
+
+8サブニッチ調査で、Mushroom Frog・Cottagecore Frog・Frog & Mushroom(全般)の3つがEtsy複数独立セラー・Amazon個別SKU・**既存の塗り絵テーマ`cottagecore-mushroom-garden`**の3方向から裏付けられ、今回の全深掘り調査の中で最も強いエビデンスが得られました。`research/themes/themes.json` の `cottagecore-mushroom-garden` エントリに `related_sticker_theme_id: "sticker-goblincore-mushroom-frog"` を追加し、内部リンクを確立しました。
+
+キーワード需要とビジュアル需要を分離した結果、「Goblincore」という単語自体は2021年バズ(Etsy公式+695%)から鮮度が薄れており2026年Pinterest公式トレンドにも非掲載である一方、**Mushroom/Frog/Cottagecoreというビジュアル・モチーフの需要は単語の人気に関係なく独立して成立**していることが判明。「Frog & Mushroom(全般)」を親カテゴリ、「Mushroom Frog」「Cottagecore Frog」をフレーバーバリエーションとする構成を推奨します。
+
+**重要IP注意(新規発見)**: カエルモチーフ全般でSanrio「ケロッピ(Keroppi)」への意匠寄せ(丸い目・赤白ストライプ服・パステルグリーンの組み合わせ)を避けること。2025〜2026年にSanrioがY2Kノスタルジー路線でケロッピ関連グッズを再展開する動きがあり、既存ip_risk_blocklistの「Sanrio」への間接適用として商品企画時にNGアイデアへ明記します。
+
+商品横展開: Mushroom Frog / Cottagecore Frog / Frog & Mushroom(全般)はいずれも **Both(ステッカー×塗り絵)・Digital Sticker・Printable・Bundle** の全方位に適する、今回調査した3テーマ中もっとも横展開性が高い結果となりました。
+
+---
+
 ## WHAT CHANGED THIS WEEK
 
 **BASELINE CREATED**(ステッカーモジュールの初回実行のため、比較対象となる前回データが存在しません)。
@@ -114,31 +170,64 @@ TikTokでDIYカピバラステッカー動画がCraftTok文脈でバイラル化
 
 ---
 
-## THIS WEEK'S BUILD LIST
+## THIS WEEK'S BUILD LIST(2026-08-27 深掘り後・最新版)
 
 **Priority 1**
-- Theme: Book Club & Poetcore Stationery Stickers
-- Product: Sticker Pack("Bookish Poet" Sticker Collection)
-- Sticker / Coloring / Both: **Sticker**
-- Why: 今回の調査で唯一、Pinterest公式一次データが直接「ステッカー」という単語で+243%を記録。文房具・読書コミュニティという裾野の広いターゲット
-- Recommended test quantity: 15〜20デザイン
-- IP Risk: LOW
+- Theme: Frog & Mushroom(Cottagecore/Goblincore)— 親カテゴリ
+- Product Type: Sticker Pack + 既存塗り絵テーマ`cottagecore-mushroom-garden`との連動キャンペーン(**Both**)
+- Priority: 1(今回の深掘りで最も裏付けが強化されたテーマ)
+- Why Now: Etsy・Amazon・Pinterest・塗り絵書籍の4方向から裏付け、Confidence=High。既存塗り絵テーマとの内部リンク確立済み
+- Recommended Test Quantity: ステッカー12〜15デザイン、塗り絵は既存シリーズへ追加数ページ
+- IP Risk: LOW(**Sanrio「ケロッピ」風の意匠は避けること**)
+- Etsy Keyword: cottagecore frog mushroom sticker, frog and mushroom sticker pack
+- Pinterest Keyword: frogcore aesthetic, cottagecore mushroom
+- Cross-sell Opportunity: 塗り絵`cottagecore-mushroom-garden`とのバンドル販売、ステッカー購入者への塗り絵レコメンド
 
 **Priority 2**
-- Theme: Coquette Bow Sticker Packs
-- Product: Sticker Pack("Coquette Bow Collection")
-- Sticker / Coloring / Both: **Sticker**
-- Why: Etsy・Amazon双方で既にモメンタムが確認できる、最も裾野の広いティーン〜20代女性向けテーマ
-- Recommended test quantity: 15デザイン(カラーバリエーション違いも1デザインとしてカウント)
-- IP Risk: LOW(特定作家画風の模倣を避けること)
+- Theme: Book Club Stickers
+- Product Type: Sticker Pack("The Poet's Shelf" Sticker Collection)(**Sticker Only**)
+- Priority: 2(唯一の一次事実データ、商品化スピード最速)
+- Why Now: Pinterest公式実測値"book club stickers"+243%が本調査全体で最も確度の高いシグナル
+- Recommended Test Quantity: 15〜20デザイン
+- IP Risk: LOW(ただし**「BookTok」「Silent Book Club」は登録商標のため商品名に使わない**)
+- Etsy Keyword: book club stickers, reading journal stickers
+- Pinterest Keyword: book club aesthetic, bookish stationery
+- Cross-sell Opportunity: 現時点で塗り絵側に直接対応するテーマなし(coloring_fit低)。将来「コージー読書」系塗り絵テーマが検出されれば連携候補
 
 **Priority 3**
-- Theme: Goblincore Mushroom & Frog Stickers
-- Product: Sticker Pack + 既存塗り絵テーマ(`cottagecore-mushroom-garden`)との連動キャンペーン
-- Sticker / Coloring / Both: **Both**
-- Why: Etsyで実証済みの需要(250点規模バンドル)＋塗り絵側で既に検証中のテーマとの相乗効果
-- Recommended test quantity: ステッカー10デザイン、塗り絵は既存シリーズの追加ページとして数枚
+- Theme: Cottagecore Frog(Goblincoreのフレーバーバリエーション)
+- Product Type: Sticker Pack(**Both**、Priority 1の横展開)
+- Priority: 3
+- Why Now: 単独でもEtsy専用マーケットページ複数、塗り絵側との親和性がPriority1に次いで高い
+- Recommended Test Quantity: 8〜10デザイン
+- IP Risk: LOW(同上ケロッピ注意)
+- Etsy Keyword: cottagecore frog sticker
+- Pinterest Keyword: cottagecore frog aesthetic
+- Cross-sell Opportunity: Priority1のバンドルに統合可能
+
+**Priority 4**
+- Theme: Balletcore Bow Sticker Packs(新規分離)
+- Product Type: Sticker Pack(**Sticker Only**、小規模探索的テスト)
+- Priority: 4
+- Why Now: ファッション/Pinterestの上流トレンドは伸びているが、ステッカー特化での供給がまだ薄い空白地帯候補。ただしConfidence Low〜Mediumのため小ロットに留める
+- Recommended Test Quantity: 5〜8デザイン(探索的)
 - IP Risk: LOW
+- Etsy Keyword: balletcore bow sticker
+- Pinterest Keyword: balletcore aesthetic
+- Cross-sell Opportunity: なし(現時点で独立商品)
+
+**Priority 5**
+- Theme: Poetcore Stationery Stickers(新規分離、仮説検証)
+- Product Type: Sticker Pack(**Sticker Only**、小規模探索的テスト)
+- Priority: 5
+- Why Now: Book Clubに次いで隣接する仮説だが実測値なし。競合が薄いうちに安価に検証する価値あり
+- Recommended Test Quantity: 5〜8デザイン(探索的)
+- IP Risk: MEDIUM(**「Tortured Poets」に類似した言い回しを避けること**)
+- Etsy Keyword: poetcore stickers, fountain pen stickers
+- Pinterest Keyword: poet aesthetic, poetcore
+- Cross-sell Opportunity: Priority2(Book Club)のデラックス版バンドルに含めることも検討可
+
+**参考(見送りから再検討候補への降格)**: Coquette Bow Sticker Packs全体(旧Priority2)は、深掘りの結果BUILD_NOWからTESTへ格下げしたため、上記Priority 1〜5には含めていません。Bookish Coquette / Dark Coquetteは次回以降の追加テスト候補として`research/themes/stickers.json`のsub_niches内に記録済みです。
 
 ---
 
@@ -152,6 +241,12 @@ TikTokでDIYカピバラステッカー動画がCraftTok文脈でバイラル化
 | Sanrio/Rilakkuma/Monchhichi/Tamagotchi等の既存キャラクター模倣 | config/research-config.jsonのip_risk_blocklistに抵触する既存IP |
 | Y2K Holographic/Chrome Finishの単独商品化 | データ不足(単一出典)。「世界観」ではなく「仕上げ材質」トレンドのため、独立商品より既存テーマへのオプションとして扱うべき |
 | Low Cortisol関連の既存アニメ/ゲームキャラクター模倣版 | フレーズ自体は低リスクだが、派生画像がThe Amazing Digital Circus・ウマ娘等の既存IPと組み合わさって拡散しているため、そうした絵柄の模倣は既存IP侵害リスク |
+| Pastel Bow(基準ニッチ)単独 | 専門書籍まで出版される成熟度(Trend Stage 4〜5相当)。新規単独参入は非推奨 |
+| Cherry Bow / Vintage Bow / Romantic Bow / Bow & Books | いずれもコモディティ化済み、または他ニッチ(Pastel Bow/Bookish Coquette)と実質重複 |
+| Books & Coffee(Book Clubサブニッチ) | Etsyで3,000件超規模を示唆する飽和カテゴリ、汎用的すぎて差別化困難 |
+| 「BookTok」「Silent Book Club」をそのまま冠した商品名 | いずれも登録商標。商品タイトル・タグとしての直接使用は避ける |
+| Forest Creature(単独) | 既存出版ブランド(Dylanna Press, Jade Summer等)多数の成熟レッドオーシャン |
+| カエルモチーフのSanrio「ケロッピ」風デザイン | 丸い目・赤白ストライプ服・パステルグリーンの組み合わせは既存IPへの意匠寄せとみなされるリスク |
 
 ---
 
@@ -292,3 +387,5 @@ TikTokでDIYカピバラステッカー動画がCraftTok文脈でバイラル化
 2. Book Club & Poetcore、Gimme Gummy、Curated ClutterはPinterest単独ソースのため、次回調査でEtsy/Amazon側の実商品有無を最優先確認する
 3. Dark Academia・Goblincore・Capybaraはcoloring moduleと世界観が重複するため、両カテゴリのスコア推移を並べて追跡する価値がある(将来的な共通Trend Database統合の検討材料)
 4. フレーズ系候補(TRADEMARK CHECK REQUIRED)は、取得可能であれば次回以降USPTO等の公的商標データベースでの実際の確認を試みること
+5. 【2026-08-27深掘り追加】Ballet Bow・Poetcore Stationeryは仮説段階のため、次回調査でEtsy/Amazonへの実際の波及有無を最優先確認すること
+6. Obsidian連携は今回も未着手(ユーザーのPC作業時に対応予定)。research/themes/stickers.json・trend-history.{csv,json}への記録は完了しているため、Obsidian接続時にそのままインポート可能な状態

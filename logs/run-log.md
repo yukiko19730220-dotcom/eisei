@@ -51,3 +51,27 @@
   - ローカルスケジューラまたはGitHub Actionsへのステッカーモジュール接続
   - 共通Trend Database(themes.json + stickers.jsonの統合)への本格移行の可否判断
   - PR作成・mainへのマージ(前回セッションから引き続き未実施)
+
+## 2026-08-27 (ステッカーTOP3のサブニッチ深掘り検証)
+- トリガー: 人間からの直接指示(「今週のステッカー候補3テーマを既存トレンドシステムへ登録・評価・商品化する」)
+- 実施内容:
+  - Book Club & Poetcore / Coquette Bow / Goblincore Mushroom & Frog の3テーマを、それぞれ8〜10個の
+    サブニッチに分解評価する追加調査エージェントを3件並行実行
+  - 「book club stickers +243%」を事実として確定させ、Poetcore自体の成長率(+175%/+75%はファッション文脈)と
+    明確に分離。新規theme_id `sticker-poetcore-stationery` として分離しTEST判定
+  - Coquette Bowは基準ニッチ(Pastel Bow)が専門書籍化されるレベルで飽和していたことが判明し、
+    **BUILD_NOW→TESTへ格下げ**(saturation_alert追加)。最有力サブニッチのBallet Bowを新規theme_id
+    `sticker-ballet-bow` として分離
+  - Goblincore Mushroom & Frogは8サブニッチ調査でConfidence Medium→**High**へ強化。既存の塗り絵テーマ
+    `cottagecore-mushroom-garden` に `related_sticker_theme_id` を追加し内部リンクを確立
+  - 新規IPリスク発見: 「BookTok」「Silent Book Club」が登録商標であること、カエルモチーフ全般で
+    Sanrio「ケロッピ」への意匠寄せリスクがあることを`stickers.json`のip_adjacency_notes等に記録
+  - `research/themes/stickers.json` を schema_version 1.1 に更新(sub_niches配列、priority_ranking追加)
+  - `research/history/trend-history.csv` / `.json` の該当行を同日改訂(2件)+ 新規2行追加
+  - `research/reports/2026-08-27-sticker-weekly-report.md` に深掘り分析セクション・更新版BUILD LISTを追記
+  - `research/raw/deep-dive/` を新設し3件の生データを保存
+- 成功ソース: Etsy/Amazon/Pinterest(検索経由)、USPTO商標情報(Trademarkia/Justia経由の間接確認)
+- 失敗ソース: 引き続きetsy.com/amazon.com/pinterest.com/trends.google.comへの直接WebFetch
+- RESEARCH INCOMPLETE: いいえ
+- 塗り絵モジュールのコアデータへの変更は`cottagecore-mushroom-garden`への内部リンク追加のみ(既存スコア・判定は変更なし)
+- 未実施・持ち越し事項: Obsidian連携(引き続きユーザーのPC作業時に対応予定)、PR作成・mainへのマージ
