@@ -75,3 +75,20 @@
 - RESEARCH INCOMPLETE: いいえ
 - 塗り絵モジュールのコアデータへの変更は`cottagecore-mushroom-garden`への内部リンク追加のみ(既存スコア・判定は変更なし)
 - 未実施・持ち越し事項: Obsidian連携(引き続きユーザーのPC作業時に対応予定)、PR作成・mainへのマージ
+
+## 2026-08-31 (手動セッション、自動実行の失敗を受けた埋め合わせ)
+- トリガー: schedule(GitHub Actions, run #33360353072)が実際には調査・保存・コミットを一切行わずに「成功」を報告して終了する不具合が発生し、`scripts/validate-output.mjs`が必須チェック4件の失敗を検出。ユーザーへの説明後、チャット経由の手動セッションで今週分を埋め合わせた。
+- 実施内容:
+  - Amazon/Etsy/Pinterest/Google Trends/SNS(TikTok・Instagram)/Google検索の6市場を並行調査エージェントで実施
+  - `research/raw/{amazon,etsy,pinterest,google-trends,social,google}/2026-08-31-*-research.md` を新規作成(research/raw/googleは今回が初の実ファイル)
+  - `research/reports/2026-08-31-weekly-report.md` を作成(EXECUTIVE SUMMARY / TOP10 / WHAT CHANGED / ブルーオーシャン候補 / Trend Radar / 商品企画 / DATA QUALITY REPORTの全構成)
+  - `research/themes/themes.json` を今週スナップショットで上書き(13テーマ、新規2件: Goblincore Coloring, Old Money/Quiet Luxury Lifestyle Coloring)
+  - `research/history/trend-history.csv` / `.json` に2026-08-31分13行を追記
+  - Grandmacore Cottage Coloring を BUILD_NOW→TEST へ格下げ(1週間経っても実商品化が進まなかったため)。Analog Lifestyle/Digital-Detox Ritual Coloring をブルーオーシャン監視項目からBUILD_NOWへ格上げ(VELOCITY ALERT、確認市場数が1→4に拡大)
+- 成功ソース: Amazon/Etsy/Pinterest/Google Trends/SNS/Google検索いずれもWebSearch経由の情報取得は成功。Pinterest公式Fall 2026 Hobbies Trend Report・Predicts 2026という高信頼度の一次情報を特定
+- 失敗ソース: amazon.com/etsy.com/pinterest.com(newsroom含む)/trends.google.com/tiktok.comへの直接WebFetchは全件`EGRESS_BLOCKED`。加えて今回はkdpeasy.com/coloringbook.dev/coloringqueen.net/nssmag.com/moneywise.com/shopping.yahoo.comへの直接WebFetchもブロックされ、WebSearch要約のみに依存
+- 検出テーマ数: 13 (新規: 2 — Goblincore Coloring, Old Money/Quiet Luxury Lifestyle Coloring)
+- BUILD NOW: 3件 / TEST: 8件 / WATCH: 1件 / AVOID: 2件
+- RESEARCH INCOMPLETE: いいえ
+- 既知の不具合(申し送り): `scripts/compare-history.mjs`が`trend-history.json`のcategory(coloring/sticker)を区別せず「直近の日付」を選ぶため、片方のモジュールしか実行しない週は誤った基準日と比較される(今回は2026-08-27のstickerスナップショットが誤って選ばれた)。本レポートではcategoryフィルタ済みの一時履歴ファイルを作成して回避したが、スクリプトへの`--category`オプション追加を次回以降のTODOとする。また、2026-08-31分の自動実行(run #33360353072)が「成功」ステータスで何も生成しなかった根本原因調査は、本セッションのスコープ外として未着手。
+- 備考: `git config user.name`/`user.email`はこのセッションの環境設定に従う(通常のgit ID)。作業ブランチは`claude/weekly-research-error-38wfqt`(セッション指定のため、指示書section 14記載の「mainへ直接push」ではなく当該ブランチへpush)。

@@ -1,233 +1,421 @@
 {
   "schema_version": "2.0",
-  "research_date": "2026-08-26",
+  "research_date": "2026-08-31",
   "market": "US/UK/CA/AU (English-speaking, Amazon KDP + Etsy Printables focus)",
-  "methodology_note": "WebFetch access to amazon.com, etsy.com, pinterest.com, trends.google.com, tiktok.com, reddit.com and several third-party blogs was blocked by the session's network egress policy in this environment. Findings below are based on WebSearch snippets/summaries, one purpose-built Pinterest research artifact, and publicly reported facts only. No sales figures, review counts, or rankings were invented; unverifiable claims are flagged as such in the raw research files under research/raw/. This snapshot predates the automated weekly system (config/research-config.json, prompts/weekly-research.md) and was migrated to schema_version 2.0 retroactively as the baseline (momentum_score is null for every theme because there is no prior week to compare against).",
+  "methodology_note": "先週(2026-08-31分)の自動実行は成果物を生成せず失敗したため、本スナップショットは手動セッションで再構築した。WebFetch access to amazon.com, etsy.com, pinterest.com, trends.google.com, tiktok.com and several third-party blogs (kdpeasy.com, coloringbook.dev, coloringqueen.net, nssmag.com, moneywise.com, shopping.yahoo.com) was blocked by the session's network egress policy. Findings are based on WebSearch snippets/summaries plus two Pinterest official reports (Fall 2026 Hobbies Trend Report, Predicts 2026) reachable only via WebSearch summaries. No sales figures, review counts, or rankings were invented; unverifiable claims are flagged as such in research/raw/. scripts/compare-history.mjs does not filter by category(coloring/sticker) when picking the 'most recent prior date', so a category-filtered temporary history file was used for this week's comparison — recommend adding a --category option to the script.",
   "themes": [
     {
-      "theme_id": "cozy-kitchen-witch",
-      "name_en": "Cozy Kitchen Witch",
-      "name_ja": "コージー・キッチンウィッチ（ハーブ薬草魔女）",
+      "theme_id": "cozy-cafe-bookstore",
+      "name_en": "Cozy Cafe & Bookstore Series",
+      "name_ja": "コージー・カフェ＆ブックストア",
       "rank": 1,
-      "opportunity_score": 87,
-      "momentum_score": null,
+      "opportunity_score": 86,
+      "momentum_score": 55,
       "confidence": "High",
-      "trend_stage": 2,
+      "trend_stage": 3,
       "decision": "BUILD_NOW",
       "velocity_alert": false,
       "saturation_alert": false,
       "seasonal": false,
       "sources_count": 4,
-      "evidence_markets": ["amazon", "etsy", "pinterest", "sns"],
-      "first_seen_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "subscores": { "demand": 22, "growth": 24, "competition_room": 15, "cover_appeal": 9, "ai_fit": 9, "series_potential": 8 },
-      "key_signal": "Pinterest Hobbies Trend Report 2026: herbal apothecary +595%; Practical Magic 2 movie release Sept 2026 as timing catalyst",
-      "sources": [
-        "https://www.amazon.com/Cozy-Witch-Life-Featuring-Relaxation/dp/B0H5TJM2J3",
-        "https://www.etsy.com/listing/1644754396/witch-cats-coloring-pages-forest",
-        "pinterest-research-artifact"
+      "evidence_markets": [
+        "amazon",
+        "etsy",
+        "pinterest",
+        "google"
       ],
-      "notes": "初回スコアリング(2026-08-26)。momentum_scoreは次回調査でスナップショット比較が可能になってから算出される。"
+      "first_seen_date": "2026-08-26",
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 23,
+        "growth": 20,
+        "competition_room": 14,
+        "cover_appeal": 9,
+        "ai_fit": 10,
+        "series_potential": 10
+      },
+      "key_signal": "Amazon 7点以上+新派生'Cozy Library'、Etsy新規出品継続、Pinterest Fall Hobbies Trend Reportの'Home Café Engineering'(banana syrup +916%等)が追い風。",
+      "sources": [
+        "https://us.amazon.com/Cozy-Bookstore-Coloring-Book-Bookshelves/dp/B0H3NTBH7D",
+        "https://us.amazon.com/Cozy-Library-Coloring-Book-Cottagecore/dp/B0H3FBSYML",
+        "https://www.etsy.com/listing/4514971581/cozy-bookshop-coloring-page-book-lover",
+        "https://wwd.com/business-news/business-features/pinterest-fall-2026-trend-report-equestrian-style-secondhand-thrifting-cosmic-wellness-rituals-1239148348/"
+      ],
+      "notes": "先週3位→今週1位。Cozy Libraryを独立フレーバーとして企画に追加。"
     },
     {
-      "theme_id": "grandmacore-cottage",
-      "name_en": "Grandmacore Cottage Coloring",
-      "name_ja": "グランマコア（おばあちゃんの台所・編み物・刺繍世界観）",
+      "theme_id": "cozy-kitchen-witch",
+      "name_en": "Cozy Kitchen Witch",
+      "name_ja": "コージー・キッチンウィッチ（ハーブ薬草魔女）",
       "rank": 2,
       "opportunity_score": 85,
-      "momentum_score": null,
-      "confidence": "Low",
-      "trend_stage": 1,
+      "momentum_score": 45,
+      "confidence": "High",
+      "trend_stage": 3,
       "decision": "BUILD_NOW",
       "velocity_alert": false,
-      "saturation_alert": false,
+      "saturation_alert": true,
       "seasonal": false,
-      "sources_count": 1,
-      "evidence_markets": ["pinterest"],
+      "sources_count": 5,
+      "evidence_markets": [
+        "amazon",
+        "etsy",
+        "pinterest",
+        "social",
+        "google"
+      ],
       "first_seen_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "subscores": { "demand": 18, "growth": 24, "competition_room": 19, "cover_appeal": 8, "ai_fit": 8, "series_potential": 8 },
-      "key_signal": "Pinterest Spring Trend Report 2026: grandma core kitchen +545%, dark cottagecore kitchen +915%. Almost no dedicated Amazon/Etsy coloring products found yet.",
-      "sources": ["pinterest-research-artifact"],
-      "notes": "Confidence=Lowにもかかわらず BUILD_NOW とした例外。理由: Opportunity Scoreの根拠がPinterest公式の一次データ(成長率明記)であり、単なる憶測ではないため。次回調査でEtsy/Amazonへの波及有無を最優先で確認すること。"
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 22,
+        "growth": 22,
+        "competition_room": 13,
+        "cover_appeal": 9,
+        "ai_fit": 9,
+        "series_potential": 10
+      },
+      "key_signal": "Amazon競合が先週の数点から7〜8点へ急増(SATURATION ALERT)。Pinterest公式Fall Hobbies Trend ReportでKitchen Witchトレンドが確定・詳細化。",
+      "sources": [
+        "https://us.amazon.com/Cozy-Kitchen-Witch-Coloring-Book/dp/B0G34GX78Q",
+        "https://www.amazon.com/Cozy-Witchy-Kitchens-Apothecaries-Coloring/dp/B0GJWXMC3V",
+        "https://wwd.com/business-news/business-features/pinterest-fall-2026-trend-report-equestrian-style-secondhand-thrifting-cosmic-wellness-rituals-1239148348/"
+      ],
+      "notes": "Trend Stage 2→3(Amazon商品増加)。競合急増のためサブニッチ(Sea Witch等)への早期展開を推奨。"
     },
     {
-      "theme_id": "cozy-cafe-bookstore",
-      "name_en": "Cozy Cafe & Bookstore Series",
-      "name_ja": "コージー・カフェ＆ブックストア",
+      "theme_id": "digital-detox-analog-ritual",
+      "name_en": "Analog Lifestyle / Digital-Detox Ritual Coloring",
+      "name_ja": "アナログ・ライフスタイル／デジタルデトックス儀式",
       "rank": 3,
-      "opportunity_score": 84,
+      "opportunity_score": 83,
       "momentum_score": null,
       "confidence": "Medium",
       "trend_stage": 3,
       "decision": "BUILD_NOW",
-      "velocity_alert": false,
+      "velocity_alert": true,
       "saturation_alert": false,
       "seasonal": false,
-      "sources_count": 2,
-      "evidence_markets": ["amazon", "etsy"],
-      "first_seen_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "subscores": { "demand": 23, "growth": 19, "competition_room": 14, "cover_appeal": 9, "ai_fit": 9, "series_potential": 10 },
-      "key_signal": "Multiple independent Amazon and Etsy listings for cozy bakery/bookstore/coffee shop themes; strong horizontal series potential.",
-      "sources": [
-        "https://www.amazon.com/Cozy-Bakery-Coloring-Book-Collection/dp/B0H94562C8",
-        "https://www.amazon.com/dp/B0GW8DNHL2",
-        "https://www.etsy.com/listing/4460164126/cozy-bookshop-library-coloring-pages-for",
-        "https://www.etsy.com/listing/1701512480/40-storefront-coloring-pages-bookstore"
+      "sources_count": 4,
+      "evidence_markets": [
+        "amazon",
+        "pinterest",
+        "social",
+        "google"
       ],
-      "notes": "初回スコアリング(2026-08-26)。"
+      "first_seen_date": "2026-08-26",
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 20,
+        "growth": 24,
+        "competition_room": 15,
+        "cover_appeal": 8,
+        "ai_fit": 8,
+        "series_potential": 8
+      },
+      "key_signal": "先週はブルーオーシャン監視項目(Amazonのみ)だったが、今週Amazon実商品7点確認+Pinterest Fall Hobbies Trend Report全体がアナログ回帰テーマ+Google/SNSでも独立裏付け。確認市場数が実質1→4に拡大(VELOCITY ALERT)。",
+      "sources": [
+        "https://www.amazon.com/Digital-Detox-Unplugged-Coloring-Tech-Free/dp/B0FWQLJMLW",
+        "https://vitamagazine.com/2026/08/25/pinterest-says-your-next-fall-obsession-should-get-you-off-your-phone/",
+        "https://www.deseret.com/entertainment/2026/01/05/how-to-get-organized-and-stay-off-the-phone-in-the-new-year-2026-planners-journals-hobbies/"
+      ],
+      "notes": "初回のtheme登録(第1回目のmomentum計算対象外のためnull)。Confidenceは高いOpportunity Scoreに対しあえてMediumに抑制(Etsy側の直接裏付けがまだ弱いため)。"
     },
     {
-      "theme_id": "capybara-cottagecore",
-      "name_en": "Capybara Cozy & Cottagecore",
-      "name_ja": "カピバラ×コージー／コテージコア",
+      "theme_id": "goblincore-coloring",
+      "name_en": "Goblincore Coloring",
+      "name_ja": "ゴブリンコア塗り絵",
       "rank": 4,
-      "opportunity_score": 79,
+      "opportunity_score": 78,
       "momentum_score": null,
       "confidence": "Medium",
-      "trend_stage": 3,
+      "trend_stage": 2,
       "decision": "TEST",
-      "velocity_alert": false,
+      "velocity_alert": true,
       "saturation_alert": false,
       "seasonal": false,
-      "sources_count": 3,
-      "evidence_markets": ["amazon", "etsy", "sns"],
-      "first_seen_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "subscores": { "demand": 19, "growth": 17, "competition_room": 13, "cover_appeal": 9, "ai_fit": 9, "series_potential": 8 },
-      "key_signal": "Present across Amazon, Etsy and referenced as a TikTok/character animal trend, but no independent Google Trends or Pinterest official confirmation found.",
-      "sources": [
-        "https://www.amazon.com/Cozy-Capybara-Coloring-Book-Cottagecore/dp/B0GCDB1ST9",
-        "https://www.etsy.com/market/capybara_coloring_pages_printable"
+      "sources_count": 4,
+      "evidence_markets": [
+        "etsy",
+        "amazon",
+        "google",
+        "social"
       ],
-      "notes": "初回スコアリング(2026-08-26)。"
-    },
-    {
-      "theme_id": "cottagecore-mushroom-garden",
-      "name_en": "Cottagecore Mushroom & Garden",
-      "name_ja": "コテージコア・きのこ＆ガーデン",
-      "rank": 5,
-      "opportunity_score": 77,
-      "momentum_score": null,
-      "confidence": "Medium",
-      "trend_stage": 3,
-      "decision": "TEST",
       "related_sticker_theme_id": "sticker-goblincore-mushroom-frog",
-      "velocity_alert": false,
-      "saturation_alert": false,
-      "seasonal": false,
-      "sources_count": 3,
-      "evidence_markets": ["amazon", "etsy", "pinterest"],
-      "first_seen_date": "2026-08-26",
-      "last_updated": "2026-08-27",
-      "subscores": { "demand": 19, "growth": 15, "competition_room": 14, "cover_appeal": 9, "ai_fit": 9, "series_potential": 8 },
-      "key_signal": "Broad established base across Amazon/Etsy; Pinterest garden inspiration ideas +940% (general gardening, not coloring-specific).",
+      "first_seen_date": "2026-08-31",
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 17,
+        "growth": 22,
+        "competition_room": 16,
+        "cover_appeal": 8,
+        "ai_fit": 9,
+        "series_potential": 6
+      },
+      "key_signal": "新規テーマが初登場で4市場(Etsy複数バンドル、Amazon1点、Google複数独立記事、SNSファッション誌解説)から同時確認(VELOCITY ALERT)。Etsy先行・Amazon劣勢の疑いあり。",
       "sources": [
-        "https://www.amazon.com/Cottagecore-Coloring-Book-Wildflowers-Lifestyle/dp/1646042360",
-        "https://www.etsy.com/market/cottagecore_coloring_book"
+        "https://www.etsy.com/listing/1875378134/goblincore-coloring-book-witchy-magic",
+        "https://www.amazon.com/Goblincore-Coloring-Book-Perfection-Curiosities/dp/078584211X",
+        "https://www.accio.com/blog/printable-coloring-book-trends-to-inspire-your-next-product-or-campaign"
       ],
-      "notes": "初回スコアリング(2026-08-26)。2026-08-27: ステッカーモジュールの深掘り調査で related_sticker_theme_id (`sticker-goblincore-mushroom-frog`) と直結することを確認。塗り絵・ステッカー横断でConfidence Highまで裏付けが強化された8サブニッチ調査あり、詳細は research/themes/stickers.json 参照。"
+      "notes": "ステッカーモジュールのsticker-goblincore-mushroom-frog(BUILD_NOW/BOTH)と隣接。商品企画時は重複回避を要検討。"
     },
     {
       "theme_id": "grayscale-photorealistic",
       "name_en": "Grayscale Photorealistic Nature & Animals",
       "name_ja": "グレイスケール写実調ネイチャー＆動物塗り絵",
-      "rank": 6,
-      "opportunity_score": 76,
-      "momentum_score": null,
+      "rank": 5,
+      "opportunity_score": 79,
+      "momentum_score": 55,
       "confidence": "Medium",
-      "trend_stage": 2,
+      "trend_stage": 3,
       "decision": "TEST",
       "velocity_alert": false,
       "saturation_alert": false,
       "seasonal": false,
-      "sources_count": 2,
-      "evidence_markets": ["amazon", "etsy"],
+      "sources_count": 3,
+      "evidence_markets": [
+        "amazon",
+        "etsy",
+        "pinterest"
+      ],
       "first_seen_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "subscores": { "demand": 16, "growth": 20, "competition_room": 16, "cover_appeal": 8, "ai_fit": 7, "series_potential": 8 },
-      "key_signal": "Independently flagged by KDP niche blogs AND Etsy's own eRank blog as the fastest-growing adult niche for 2026; less saturated than line-art, but harder to mass-produce consistently with AI (lower AI-fit score).",
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 17,
+        "growth": 21,
+        "competition_room": 17,
+        "cover_appeal": 8,
+        "ai_fit": 7,
+        "series_potential": 9
+      },
+      "key_signal": "2026-08-13出版の最新刊確認、5冊シリーズ展開中。Pinterest Predicts 2026'Wilderkind'が間接的な追い風。",
       "sources": [
         "https://www.amazon.com/Grayscale-Wildlife-Photorealistic-Mindfulness-Relaxation/dp/B0HF6CD5ZK",
-        "https://help.erank.com/blog/etsy-trends-2026/"
+        "https://www.etsy.com/listing/1464321359/40-realistic-wildlife-animals-set-1"
       ],
-      "notes": "初回スコアリング(2026-08-26)。"
+      "notes": "Trend Stage 2→3。"
+    },
+    {
+      "theme_id": "cottagecore-mushroom-garden",
+      "name_en": "Cottagecore Mushroom & Garden",
+      "name_ja": "コテージコア・きのこ＆ガーデン",
+      "rank": 6,
+      "opportunity_score": 75,
+      "momentum_score": 35,
+      "confidence": "Medium",
+      "trend_stage": 4,
+      "decision": "TEST",
+      "related_sticker_theme_id": "sticker-goblincore-mushroom-frog",
+      "velocity_alert": false,
+      "saturation_alert": true,
+      "seasonal": false,
+      "sources_count": 4,
+      "evidence_markets": [
+        "amazon",
+        "etsy",
+        "pinterest",
+        "google"
+      ],
+      "first_seen_date": "2026-08-26",
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 20,
+        "growth": 14,
+        "competition_room": 13,
+        "cover_appeal": 9,
+        "ai_fit": 9,
+        "series_potential": 10
+      },
+      "key_signal": "Amazon 9点以上でさらに増加、Etsyで'mushroomcore'語が定着。Pinterest'Backyard Botanist'(押し花+457%)が隣接追い風。",
+      "sources": [
+        "https://www.amazon.com/Mushroom-Cottagecore-Coloring-Book-Adults/dp/B0GSFVX653",
+        "https://www.etsy.com/listing/1797784042/mushroomcore-coloring-book-whimsical"
+      ],
+      "notes": "Trend Stage 3→4。飽和方向、Goblincoreとの統合企画を検討。"
     },
     {
       "theme_id": "bold-easy-cute-animals",
       "name_en": "Bold & Easy Cute Animals",
       "name_ja": "ボールド＆イージー・キュートアニマル",
       "rank": 7,
-      "opportunity_score": 74,
-      "momentum_score": null,
+      "opportunity_score": 73,
+      "momentum_score": 40,
       "confidence": "Medium",
       "trend_stage": 5,
       "decision": "TEST",
       "velocity_alert": false,
       "saturation_alert": true,
       "seasonal": false,
-      "sources_count": 3,
-      "evidence_markets": ["amazon", "etsy", "sns"],
+      "sources_count": 4,
+      "evidence_markets": [
+        "amazon",
+        "etsy",
+        "social",
+        "google"
+      ],
       "first_seen_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "subscores": { "demand": 22, "growth": 12, "competition_room": 9, "cover_appeal": 9, "ai_fit": 10, "series_potential": 9 },
-      "key_signal": "Established, high-demand, cross-market style reported by BookRiot as an actual industry controversy (proof of real market weight). Heavily saturated; must be paired with a specific micro-theme to differentiate.",
-      "sources": ["https://bookriot.com/bold-and-cozy-coloring-coco-wyo-controversies/"],
-      "notes": "単独ジャンルとしては成熟(Stage 5)。TEST判定は「他テーマとの掛け合わせスタイルとして使う」場合に限る。"
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 22,
+        "growth": 13,
+        "competition_room": 9,
+        "cover_appeal": 9,
+        "ai_fit": 10,
+        "series_potential": 10
+      },
+      "key_signal": "Axolotl(アキソロトル)単体ニッチが複数独立記事で'Amazon KDPで圧倒的需要、競合中程度'と名指しされた。",
+      "sources": [
+        "https://medium.com/write-a-catalyst/i-found-5-amazon-kdp-coloring-book-niches-that-still-make-money-in-2026-5393f7828c00"
+      ],
+      "notes": "単独ジャンルは成熟済み。単一動物への絞り込み(Axolotl等)が次の一手。"
+    },
+    {
+      "theme_id": "capybara-cottagecore",
+      "name_en": "Capybara Cozy & Cottagecore",
+      "name_ja": "カピバラ×コージー／コテージコア",
+      "rank": 8,
+      "opportunity_score": 66,
+      "momentum_score": 15,
+      "confidence": "Medium",
+      "trend_stage": 5,
+      "decision": "TEST",
+      "velocity_alert": false,
+      "saturation_alert": true,
+      "seasonal": false,
+      "sources_count": 4,
+      "evidence_markets": [
+        "amazon",
+        "etsy",
+        "google-trends",
+        "social"
+      ],
+      "first_seen_date": "2026-08-26",
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 17,
+        "growth": 10,
+        "competition_room": 11,
+        "cover_appeal": 9,
+        "ai_fit": 9,
+        "series_potential": 10
+      },
+      "key_signal": "Amazon新刊投入は継続(直近2026-08-11出版)も、accio.com記事によるとGoogle Trendsの'capybaraバケットハット'検索は2025年7月がピークで以降再燃データなし。供給過多・需要頭打ちの兆候。",
+      "sources": [
+        "https://www.accio.com/business/capybara-trend-summer-2026"
+      ],
+      "notes": "先週79→今週66。SATURATION ALERT、新規参入には慎重を要する。"
+    },
+    {
+      "theme_id": "grandmacore-cottage",
+      "name_en": "Grandmacore Cottage Coloring",
+      "name_ja": "グランマコア（おばあちゃんの台所・編み物・刺繍世界観）",
+      "rank": 9,
+      "opportunity_score": 68,
+      "momentum_score": 10,
+      "confidence": "Low",
+      "trend_stage": 1,
+      "decision": "TEST",
+      "velocity_alert": false,
+      "saturation_alert": false,
+      "seasonal": false,
+      "sources_count": 2,
+      "evidence_markets": [
+        "amazon",
+        "pinterest"
+      ],
+      "first_seen_date": "2026-08-26",
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 14,
+        "growth": 18,
+        "competition_room": 16,
+        "cover_appeal": 8,
+        "ai_fit": 7,
+        "series_potential": 5
+      },
+      "key_signal": "Amazon実商品は2〜3点のまま増加なし。Etsyでも塗り絵単体としては未確立。Pinterest側の新規公式データもなし。",
+      "sources": [
+        "https://us.amazon.com/Granny-Chic-Coloring-Book-Cottagecore/dp/B0GX7712CV",
+        "https://www.etsy.com/market/grandmacore"
+      ],
+      "notes": "先週BUILD_NOW(85点)→今週TEST(68点)へ格下げ。1週間経っても実商品化が進まなかったための慎重な再評価(機械的足切りではなく実地追跡の結果)。"
     },
     {
       "theme_id": "dark-academia-gothic-library",
       "name_en": "Dark Academia Gothic Library",
       "name_ja": "ダークアカデミア・ゴシック図書館",
-      "rank": 8,
-      "opportunity_score": 68,
-      "momentum_score": null,
+      "rank": 10,
+      "opportunity_score": 62,
+      "momentum_score": 20,
       "confidence": "Low",
-      "trend_stage": 2,
+      "trend_stage": 4,
       "decision": "WATCH",
       "velocity_alert": false,
       "saturation_alert": true,
       "seasonal": false,
-      "sources_count": 1,
-      "evidence_markets": ["amazon"],
+      "sources_count": 2,
+      "evidence_markets": [
+        "amazon",
+        "etsy"
+      ],
       "first_seen_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "subscores": { "demand": 13, "growth": 14, "competition_room": 13, "cover_appeal": 9, "ai_fit": 9, "series_potential": 10 },
-      "key_signal": "Low competition per KDP blogs, but multiple similar Amazon products launched within a few months in 2026 — early sign of the niche filling up quickly. No Pinterest/SNS confirmation.",
-      "sources": ["kdpeasy.com (summary only, fetch blocked)"],
-      "notes": "ブルーオーシャン候補としても要監視。次回調査で競合増加ペースを最優先確認。"
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 12,
+        "growth": 11,
+        "competition_room": 11,
+        "cover_appeal": 9,
+        "ai_fit": 9,
+        "series_potential": 10
+      },
+      "key_signal": "Amazon競合が9点以上へさらに増加継続。Etsyで'kawaii化'した派生も出現(二次分化=成熟シグナル)。",
+      "sources": [
+        "https://us.amazon.com/Dark-Academia-Enchanted-Library-Coloring/dp/B0H2MQ2JSJ"
+      ],
+      "notes": "Trend Stage 2→4。低競争ニッチという評価はもはや過去のもの、新規参入は非推奨。"
     },
     {
       "theme_id": "spooky-cute-halloween",
       "name_en": "Spooky Cute (Creepy-Cute)",
       "name_ja": "スプーキーキュート（クリーピーキュート）",
-      "rank": 9,
-      "opportunity_score": 64,
-      "momentum_score": null,
+      "rank": 11,
+      "opportunity_score": 65,
+      "momentum_score": 50,
       "confidence": "Medium",
       "trend_stage": 3,
       "decision": "AVOID",
       "velocity_alert": false,
       "saturation_alert": false,
       "seasonal": true,
-      "sources_count": 2,
-      "evidence_markets": ["etsy", "sns"],
+      "sources_count": 3,
+      "evidence_markets": [
+        "etsy",
+        "amazon",
+        "social"
+      ],
       "first_seen_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "subscores": { "demand": 15, "growth": 12, "competition_room": 12, "cover_appeal": 9, "ai_fit": 9, "series_potential": 7 },
-      "key_signal": "Real Etsy listings exist; TikTok 'cute horror/cutegore' aesthetic referenced, but strongly seasonal (Halloween window) with no evergreen path of its own.",
-      "sources": ["https://www.etsy.com/listing/1862755492/spooky-cutie-creepy-creature-coloring"],
-      "notes": "単独商品化ではなくCozy Kitchen Witchの季節限定シリーズ(ハロウィン版)として吸収する方針。"
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 15,
+        "growth": 12,
+        "competition_room": 12,
+        "cover_appeal": 9,
+        "ai_fit": 9,
+        "series_potential": 8
+      },
+      "key_signal": "ハロウィンシーズン接近に伴い季節的に増加(Etsy新規出品複数、Amazon既存新刊も継続)。",
+      "sources": [
+        "https://www.etsy.com/listing/4382191107/spooky-cutie-cozy-creepy-coloring-book"
+      ],
+      "notes": "単独商品化ではなくCozy Kitchen Witchの季節限定シリーズとして吸収する方針は継続。"
     },
     {
       "theme_id": "kawaii-original-character",
       "name_en": "Kawaii Original-Character Coloring",
       "name_ja": "オリジナルキャラクター・カワイイ塗り絵",
-      "rank": 10,
-      "opportunity_score": 60,
-      "momentum_score": null,
+      "rank": 12,
+      "opportunity_score": 58,
+      "momentum_score": 25,
       "confidence": "Medium",
       "trend_stage": 4,
       "decision": "AVOID",
@@ -235,50 +423,102 @@
       "saturation_alert": true,
       "seasonal": false,
       "sources_count": 2,
-      "evidence_markets": ["amazon", "etsy"],
+      "evidence_markets": [
+        "amazon",
+        "google"
+      ],
       "first_seen_date": "2026-08-26",
-      "last_updated": "2026-08-26",
-      "subscores": { "demand": 17, "growth": 10, "competition_room": 8, "cover_appeal": 9, "ai_fit": 9, "series_potential": 7 },
-      "key_signal": "Established demand tied to character-goods culture (Sanrio etc.), but the demand is largely IP-driven; original kawaii characters face high competition without infringing on existing IP.",
-      "sources": ["https://www.penguinrandomhouseretail.com/2025/02/05/relax-with-cute-cozy-coloring-books/"],
-      "notes": "IPリスクブロックリスト対象ブランドへの類似化を避けると差別化が困難。"
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 16,
+        "growth": 9,
+        "competition_room": 8,
+        "cover_appeal": 9,
+        "ai_fit": 9,
+        "series_potential": 7
+      },
+      "key_signal": "変化なし。'perforated page'機能によるSNS共有化が唯一の新規シグナルだが、IP依存の差別化困難という根本課題は継続。",
+      "sources": [
+        "https://create.oreate.ai/voices/mangatopia-why-these-kawaii-coloring-books-are-everywhere-right-now"
+      ],
+      "notes": "先週から明確な変化なし。"
+    },
+    {
+      "theme_id": "old-money-quiet-luxury",
+      "name_en": "Old Money / Quiet Luxury Lifestyle Coloring",
+      "name_ja": "オールドマネー／クワイエットラグジュアリー・ライフスタイル塗り絵",
+      "rank": 13,
+      "opportunity_score": 68,
+      "momentum_score": null,
+      "confidence": "Low",
+      "trend_stage": 1,
+      "decision": "TEST",
+      "velocity_alert": false,
+      "saturation_alert": false,
+      "seasonal": false,
+      "sources_count": 1,
+      "evidence_markets": [
+        "amazon"
+      ],
+      "first_seen_date": "2026-08-31",
+      "last_updated": "2026-08-31",
+      "subscores": {
+        "demand": 14,
+        "growth": 18,
+        "competition_room": 16,
+        "cover_appeal": 8,
+        "ai_fit": 7,
+        "series_potential": 5
+      },
+      "key_signal": "Amazonで独立2ブランド('Cozy Old Money Life'、'Glamour Queens')が参入。Quiet Luxuryファッション/ライフスタイルトレンドの波及初期段階と推測。",
+      "sources": [
+        "https://www.amazon.com/Cozy-Money-Life-Coloring-Adults/dp/B0H1WXHYK1"
+      ],
+      "notes": "新規ブルーオーシャン候補。次回優先調査(Etsy/Pinterest側の裏付け確認)。"
     }
   ],
   "blue_ocean_candidates": [
     {
-      "theme": "Grandmacore Kitchen & Cottage Coloring",
-      "signal": "Pinterest公式: grandma core kitchen +545%, dark cottagecore kitchen +915%",
-      "amazon_competition": "ほぼ皆無（塗り絵カテゴリでの専用商品は未確認）",
-      "other_market_demand": "Pinterest強、Etsy萌芽段階",
-      "verdict": "有望（Sランク/BUILD_NOWにも採用）"
+      "theme": "Old Money / Quiet Luxury Lifestyle Coloring",
+      "signal": "Amazon独立2ブランド参入、Quiet Luxuryトレンド波及",
+      "amazon_competition": "少ない(2点)",
+      "other_market_demand": "Etsy/Pinterest未確認(要フォローアップ)",
+      "verdict": "有望、次回優先調査(TOP10にも13位で採用)"
     },
     {
-      "theme": "Kitchen Witch / Herbal Apothecary Coloring",
-      "signal": "Pinterest公式 herbal apothecary +595%、映画Practical Magic 2(2026年9月)タイアップ",
-      "amazon_competition": "witch単体は存在するがkitchen witch特化は少ない",
-      "other_market_demand": "Pinterest強",
-      "verdict": "有望・季節タイミング重要（Sランク/BUILD_NOWにも採用）"
+      "theme": "Liminal Space / Backrooms / Weirdcore Coloring",
+      "signal": "Etsy複数独立出品(Liminal Spaces/Backrooms/Not so Cozy Places)",
+      "amazon_competition": "ほぼ皆無",
+      "other_market_demand": "Z世代インターネット美学(weirdcore/dreamcore)由来",
+      "verdict": "ニッチだが独立需要あり、テスト候補"
     },
     {
-      "theme": "Grayscale Photorealistic Animal/Nature Coloring",
-      "signal": "複数のKDP・Etsyニッチブログが独立に急成長ニッチと指摘",
-      "amazon_competition": "線画型より少ないが増加中",
-      "other_market_demand": "業界内で一致するが一次データなし",
-      "verdict": "テスト価値あり（Aランク/TESTにも採用）"
+      "theme": "Cosmic Reset(占星術・タロット・クリスタル)",
+      "signal": "Pinterest公式Fall Hobbies Trend Report: astrology+733%, crystals+606%, tarot+558%",
+      "amazon_competition": "未確認",
+      "other_market_demand": "Pinterest公式(高信頼度)、年次Predictsとも一致",
+      "verdict": "商品化親和性が非常に高く優先調査推奨"
     },
     {
-      "theme": "Dark Academia Gothic Library Coloring",
-      "signal": "KDPブログの低競合指摘＋Amazon新刊が数ヶ月で複数投入",
-      "amazon_competition": "少ないが急増中",
-      "other_market_demand": "Pinterest/SNS未確認",
-      "verdict": "早期参入価値あり、要監視（WATCH判定だが要ウォッチ）"
+      "theme": "Backyard Botanist(押し花・ネイチャージャーナリング)",
+      "signal": "Pinterest公式: dried pressed flowers+457%, bird sketch+232%",
+      "amazon_competition": "未確認",
+      "other_market_demand": "Pinterest公式(高信頼度)",
+      "verdict": "Cottagecore Mushroom/Grayscale Natureとの掛け合わせが有望"
     },
     {
-      "theme": "Analog Lifestyle / Digital-Detox Ritual Coloring (tea rituals, journaling, slow living)",
-      "signal": "デジタルデトックス文化トレンド（Psychology Today, HealthyWayNet等）",
-      "amazon_competition": "ほぼ皆無、cozy系に一部内包のみ",
-      "other_market_demand": "ライフスタイル記事で裏付け強、SNS個別確認なし",
-      "verdict": "コンセプト先行のテスト候補"
+      "theme": "Farmcore / Cozy Farm Animals Coloring",
+      "signal": "Etsy複数出品(Cozy Farm Animals Coloring Pages: Bold and Easy等)",
+      "amazon_competition": "未確認(要調査)",
+      "other_market_demand": "Cottagecore隣接、Bold & Easyとの親和性高",
+      "verdict": "Bold & Easyとの掛け合わせスタイルとして有望"
+    },
+    {
+      "theme": "Axolotl単体ニッチ",
+      "signal": "複数独立記事: 'Amazon KDPで圧倒的需要、競合中程度'",
+      "amazon_competition": "中程度(Bold & Easy Cute Animalsに包含)",
+      "other_market_demand": "未確認",
+      "verdict": "単一動物特化の好例、次回優先調査"
     }
   ]
 }

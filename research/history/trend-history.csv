@@ -21,3 +21,16 @@ date,category,theme_id,theme_name_en,rank,opportunity_score,momentum_score,confi
 2026-08-27,sticker,sticker-y2k-holographic,Y2K Holographic / Chrome Finish Packs,10,60,,Low,2,WATCH,1,false,false,false,baseline snapshot; a finish/material trend rather than a standalone theme
 2026-08-27,sticker,sticker-poetcore-stationery,Poetcore Stationery Stickers,11,62,,Low,1,TEST,1,false,false,false,new theme split out from sticker-book-club-poetcore; fact vs hypothesis separated, no direct sticker-market evidence yet, avoid "Tortured Poet(s)"-style phrasing (TRADEMARK CHECK REQUIRED)
 2026-08-27,sticker,sticker-ballet-bow,Balletcore Bow Sticker Packs,12,63,,Low,2,TEST,2,false,false,false,new theme split out from sticker-coquette-bow; upstream fashion/Pinterest momentum ahead of sticker-specific supply
+2026-08-31,coloring,cozy-cafe-bookstore,Cozy Cafe & Bookstore Series,1,86,55,High,3,BUILD_NOW,4,false,false,false,先週3位→今週1位。Cozy Libraryを独立フレーバーとして企画に追加。
+2026-08-31,coloring,cozy-kitchen-witch,Cozy Kitchen Witch,2,85,45,High,3,BUILD_NOW,5,false,true,false,Trend Stage 2→3(Amazon商品増加)。競合急増のためサブニッチ(Sea Witch等)への早期展開を推奨。
+2026-08-31,coloring,digital-detox-analog-ritual,Analog Lifestyle / Digital-Detox Ritual Coloring,3,83,,Medium,3,BUILD_NOW,4,true,false,false,初回のtheme登録(第1回目のmomentum計算対象外のためnull)。Confidenceは高いOpportunity Scoreに対しあえてMediumに抑制(Etsy側の直接裏付けがまだ弱いため)。
+2026-08-31,coloring,goblincore-coloring,Goblincore Coloring,4,78,,Medium,2,TEST,4,true,false,false,ステッカーモジュールのsticker-goblincore-mushroom-frog(BUILD_NOW/BOTH)と隣接。商品企画時は重複回避を要検討。
+2026-08-31,coloring,grayscale-photorealistic,Grayscale Photorealistic Nature & Animals,5,79,55,Medium,3,TEST,3,false,false,false,Trend Stage 2→3。
+2026-08-31,coloring,cottagecore-mushroom-garden,Cottagecore Mushroom & Garden,6,75,35,Medium,4,TEST,4,false,true,false,Trend Stage 3→4。飽和方向、Goblincoreとの統合企画を検討。
+2026-08-31,coloring,bold-easy-cute-animals,Bold & Easy Cute Animals,7,73,40,Medium,5,TEST,4,false,true,false,単独ジャンルは成熟済み。単一動物への絞り込み(Axolotl等)が次の一手。
+2026-08-31,coloring,capybara-cottagecore,Capybara Cozy & Cottagecore,8,66,15,Medium,5,TEST,4,false,true,false,先週79→今週66。SATURATION ALERT、新規参入には慎重を要する。
+2026-08-31,coloring,grandmacore-cottage,Grandmacore Cottage Coloring,9,68,10,Low,1,TEST,2,false,false,false,先週BUILD_NOW(85点)→今週TEST(68点)へ格下げ。1週間経っても実商品化が進まなかったための慎重な再評価(機械的足切りではなく実地追跡の結果)。
+2026-08-31,coloring,dark-academia-gothic-library,Dark Academia Gothic Library,10,62,20,Low,4,WATCH,2,false,true,false,Trend Stage 2→4。低競争ニッチという評価はもはや過去のもの、新規参入は非推奨。
+2026-08-31,coloring,spooky-cute-halloween,Spooky Cute (Creepy-Cute),11,65,50,Medium,3,AVOID,3,false,false,true,単独商品化ではなくCozy Kitchen Witchの季節限定シリーズとして吸収する方針は継続。
+2026-08-31,coloring,kawaii-original-character,Kawaii Original-Character Coloring,12,58,25,Medium,4,AVOID,2,false,true,false,先週から明確な変化なし。
+2026-08-31,coloring,old-money-quiet-luxury,Old Money / Quiet Luxury Lifestyle Coloring,13,68,,Low,1,TEST,1,false,false,false,新規ブルーオーシャン候補。次回優先調査(Etsy/Pinterest側の裏付け確認)。
