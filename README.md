@@ -1,8 +1,9 @@
 # 塗り絵市場トレンド監視システム (coloring-trend-research)
 
-英語圏の塗り絵市場(Amazon KDP / Etsy Printables中心)を**毎週自動で**調査し、
-「今まさに伸び始めていて、まだ競争が激化していないテーマ」を検出して商品化候補を提案する
-自己完結型の自動化システムです。
+英語圏(海外版)および日本国内(日本版)の塗り絵市場を調査し、
+「今まさに伸び始めていて、まだ競争が激化していないテーマ」を検出して商品化候補を提案するシステムです。
+2026-08-31時点では自動実行(週次schedule)を一時停止しており、**チャット経由の手動依頼で運用**しています
+(詳細は下記「現在の稼働状況」参照)。
 
 > リポジトリ内には本システムと無関係な `index.html`(衛生管理アプリ)も存在します。
 > このREADMEは `research/` `config/` `prompts/` `scripts/` `logs/`
@@ -151,7 +152,22 @@ research: weekly coloring trend report YYYY-MM-DD
 `prompts/weekly-research.md` の記述を照らし合わせ、指示の曖昧さやツール権限
 (`--allowedTools`)の不足がないか確認してください。
 
-## ステッカーモジュールについて(2026-08-27追加)
+## 現在の稼働状況(2026-08-31時点)
+
+- **海外版塗り絵モジュールの自動実行(schedule)は一時停止中**です。2週連続で「成功」を報告しながら
+  実際には調査・保存を一切行わない不具合が発生し、原因調査にも追加費用がかかったため、
+  ユーザーの判断で `.github/workflows/coloring-trend-research.yml` の `schedule` トリガーを
+  コメントアウトしました。`workflow_dispatch`(手動実行ボタン)はGitHub上に残っていますが、
+  原因が解明・修正されるまでは積極的な利用を推奨しません。詳細経緯は `logs/run-log.md` 参照。
+- **当面はチャット経由の手動セッションで運用**します(ユーザーが都度「リサーチお願いします」等と
+  依頼し、Claude Codeがその場で調査〜レポート作成〜コミットまで行う)。
+- **ステッカーモジュールは一時停止中**です(コスト管理のためのユーザー判断。データ・設定は削除していません)。
+- 代わりに**日本市場向けの塗り絵モジュール**(`prompts/japan-coloring-research.md`)を追加しました。
+  対象はAmazon.co.jp / 楽天市場 / BOOTH・Minne・Creema / X(Twitter)・Instagram日本語圏 /
+  Google検索(日本語)。海外版とはデータを完全に分離(`research/themes/themes-japan.json`、
+  レポートは `research/reports/YYYY-MM-DD-japan-coloring-weekly-report.md`)して管理します。
+
+## ステッカーモジュールについて(2026-08-27追加、2026-08-31時点で一時停止中)
 
 2026-08-27に、塗り絵モジュールと並ぶ第2の商品カテゴリとして**ステッカーモジュール**を追加しました。
 既存の塗り絵モジュール(設定・データ・自動実行)は一切変更していません。
@@ -179,13 +195,19 @@ research: weekly coloring trend report YYYY-MM-DD
 CLAUDE.md
 README.md
 config/research-config.json
-prompts/weekly-research.md
+prompts/weekly-research.md              (海外版)
+prompts/japan-coloring-research.md      (日本版、2026-08-31追加)
+prompts/sticker-research.md             (ステッカー、一時停止中)
 scripts/{prepare-research,compare-history,validate-output}.mjs
-.github/workflows/coloring-trend-research.yml
+.github/workflows/coloring-trend-research.yml  (schedule一時停止中、workflow_dispatchのみ)
 research/
-  raw/{amazon,etsy,pinterest,google-trends,social,google}/
-  themes/themes.json
-  reports/YYYY-MM-DD-weekly-report.md
-  history/trend-history.{csv,json}
-logs/run-log.md
+  raw/{amazon,etsy,pinterest,google-trends,social,google}/         (海外版)
+  raw/japan-{amazon,rakuten,handmade,social,google}/                (日本版)
+  themes/themes.json          (海外版)
+  themes/themes-japan.json    (日本版)
+  themes/stickers.json        (ステッカー、一時停止中)
+  reports/YYYY-MM-DD-weekly-report.md                     (海外版)
+  reports/YYYY-MM-DD-japan-coloring-weekly-report.md      (日本版)
+  history/trend-history.{csv,json}   (全モジュール共通、category列で区別)
+logs/run-log.md                      (全モジュール共通)
 ```

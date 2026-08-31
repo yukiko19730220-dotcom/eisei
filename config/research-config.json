@@ -1,12 +1,19 @@
 {
   "system_name": "coloring-trend-research",
-  "version": "1.1.0",
-  "last_updated": "2026-08-27",
+  "version": "1.2.0",
+  "last_updated": "2026-08-31",
   "purpose": "Detect product themes (coloring books, stickers, and future categories) whose demand is starting to rise, before competition saturates them. NOT to rank currently-popular themes.",
-  "categories": ["coloring", "sticker"],
+  "categories": ["coloring", "coloring_japan", "sticker"],
+  "module_status": {
+    "coloring": "ACTIVE(海外版/英語圏、GitHub Actions自動実行は2026-08-31時点で一時停止中。手動セッションで運用)",
+    "coloring_japan": "ACTIVE(日本市場版、2026-08-31追加。手動実行のみ、GitHub Actions未接続)",
+    "sticker": "PAUSED(2026-08-31時点、ユーザー判断により一時停止。既存データ・configは削除せず保持)"
+  },
   "module_history": [
     { "date": "2026-08-26", "change": "coloring module launched (baseline research + automation system)" },
-    { "date": "2026-08-27", "change": "sticker module added (config/prompts/history extended additively; existing coloring config/fields left unchanged for backward compatibility with prompts/weekly-research.md). Obsidian integration and local-scheduler wiring intentionally deferred to a future session on the user's own machine." }
+    { "date": "2026-08-27", "change": "sticker module added (config/prompts/history extended additively; existing coloring config/fields left unchanged for backward compatibility with prompts/weekly-research.md). Obsidian integration and local-scheduler wiring intentionally deferred to a future session on the user's own machine." },
+    { "date": "2026-08-31", "change": "GitHub Actions schedule trigger paused after two consecutive silent-failure runs (see logs/run-log.md). System now runs on-demand via chat requests instead of weekly automation." },
+    { "date": "2026-08-31", "change": "sticker module paused at user's request (cost management); coloring_japan module added instead, covering the domestic Japanese market (Amazon.co.jp, 楽天市場, BOOTH/Minne/Creema, X(Twitter)/Instagram日本語圏, 一般のGoogle検索(日本語)). Uses the same opportunity_score_weights, trend_stages, and decision_categories as the existing coloring module, plus an additional Japan-specific IP blocklist (see ip_risk_blocklist_jp_additional). See prompts/japan-coloring-research.md." }
   ],
 
   "schedule": {
@@ -25,6 +32,19 @@
     { "id": "google", "label": "Google Search (general)", "raw_dir": "research/raw/google" }
   ],
   "raw_file_naming": "research/raw/<market>/<date>-<market>-<category>-research.md (例: 2026-08-27-etsy-sticker-research.md)。同じmarketフォルダをcoloring/stickerで共有し、ファイル名のcategoryサフィックスで区別する(共通トレンドエンジンの思想:同じ市場を二重調査しない)。",
+
+  "japan_markets": {
+    "_scope": "coloring_japan module only (prompts/japan-coloring-research.md)。海外版の markets とは対象プラットフォームが異なるため独立管理し、raw保存先も専用ディレクトリに分離する。",
+    "_note": "海外版のAmazon/Etsy/Pinterest/Google Trendsに相当する日本国内サービスとして、ユーザーの指定に基づき以下5市場を対象とする。",
+    "markets": [
+      { "id": "amazon_jp", "label": "Amazon.co.jp (大人向け塗り絵本)", "raw_dir": "research/raw/japan-amazon" },
+      { "id": "rakuten", "label": "楽天市場 (通販サイトでの塗り絵・ぬりえ関連商品)", "raw_dir": "research/raw/japan-rakuten" },
+      { "id": "handmade_jp", "label": "BOOTH / Minne / Creema (同人・ハンドメイド系、printable/デジタルダウンロードのぬりえ・イラスト素材)", "raw_dir": "research/raw/japan-handmade" },
+      { "id": "social_jp", "label": "X(Twitter) / Instagram 日本語圏", "raw_dir": "research/raw/japan-social" },
+      { "id": "google_jp", "label": "Google検索(日本語、一般トレンド記事・ブログ・ニュース)", "raw_dir": "research/raw/japan-google" }
+    ]
+  },
+  "japan_raw_file_naming": "research/raw/japan-<market>/<date>-japan-<market>-research.md (例: 2026-08-31-japan-amazon-research.md)",
 
   "trend_stages": {
     "0": "兆候なし",
@@ -155,6 +175,16 @@
     "Nintendo", "Mario", "Zelda", "Marvel", "DC Comics", "Star Wars", "Harry Potter",
     "Studio Ghibli", "Barbie", "Peppa Pig", "Paw Patrol", "Bluey"
   ],
+  "ip_risk_blocklist_jp_additional": {
+    "_scope": "coloring_japan module専用。上記の共通 ip_risk_blocklist に加えて適用する(両方を必ず確認すること)。",
+    "list": [
+      "ちいかわ", "すみっコぐらし", "ドラえもん", "アンパンマン", "クレヨンしんちゃん",
+      "ONE PIECE", "鬼滅の刃", "呪術廻戦", "推しの子", "リラックマ", "スヌーピー(Peanuts)",
+      "ミッフィー", "くまのプーさん", "キティちゃん(Sanrioと重複、明示用)", "任天堂(Nintendo重複、明示用)",
+      "特定のVTuber個人・特定の同人作家の画風模倣"
+    ],
+    "note": "日本市場は既存キャラクターIP・版権への意識が特に強い。「〜風」であっても特定作品・特定作家を明確に想起させる画風の模倣は商品化候補として提案しない。VTuberや個人クリエイターの意匠模倣も同様に扱う。"
+  },
   "ip_risk_note": "上記ブランド名・既存キャラクター名を含む商品案、または特定作家/ブランドの画風を模倣する企画は提案しない。オリジナルの世界観・キャラクターのみ提案する。",
 
   "ip_risk_levels": {
