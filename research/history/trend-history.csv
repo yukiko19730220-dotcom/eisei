@@ -34,3 +34,13 @@ date,category,theme_id,theme_name_en,rank,opportunity_score,momentum_score,confi
 2026-08-31,coloring,spooky-cute-halloween,Spooky Cute (Creepy-Cute),11,65,50,Medium,3,AVOID,3,false,false,true,単独商品化ではなくCozy Kitchen Witchの季節限定シリーズとして吸収する方針は継続。
 2026-08-31,coloring,kawaii-original-character,Kawaii Original-Character Coloring,12,58,25,Medium,4,AVOID,2,false,true,false,先週から明確な変化なし。
 2026-08-31,coloring,old-money-quiet-luxury,Old Money / Quiet Luxury Lifestyle Coloring,13,68,,Low,1,TEST,1,false,false,false,新規ブルーオーシャン候補。次回優先調査(Etsy/Pinterest側の裏付け確認)。
+2026-08-31,coloring_japan,jp-showa-retro-kissa,Showa Retro Kissaten (Retro Coffee Shop) Coloring,1,78,,Medium,2,BUILD_NOW,2,false,false,false,確認市場数2(Medium相当)だが、親カテゴリ(昭和レトロ全般)は成熟済みなのに本サブテーマの書籍競合はほぼ皆無という点を重視しBUILD_NOWの例外扱いとした。楽天/BOOTH/SNS側の裏付けが次回最優先確認事項。
+2026-08-31,coloring_japan,jp-fabric-nurie,Fabric Coloring (Textile Crossover),2,68,,Medium,2,TEST,1,false,false,false,商品形態が紙の塗り絵本と異なる点に注意。BOOTH側で同人・ハンドメイド作家の追随があるか次回確認。
+2026-08-31,coloring_japan,jp-yokai-folklore,Japanese Yokai/Folklore Coloring,3,65,,Low,1,TEST,1,false,false,false,妖怪は民間伝承でIPリスクは低いが、特定作家(水木しげる等)の画風模倣は避けること。参入者はまだ少数。
+2026-08-31,coloring_japan,jp-number-paint-kit,Number Paint / Paint-by-Number Kit,4,62,,Medium,2,TEST,1,false,false,false,紙の塗り絵本ではなくキャンバス地のペイントバイナンバー形式のため、本モジュール想定の商品形態(紙/PDF)とは異なる点に注意。優先度は他テーマより下げる。
+2026-08-31,coloring_japan,jp-futosen-ryouiku,Thick-Line Coloring for Special Needs/Therapy,5,58,,Low,1,TEST,1,false,false,false,発達支援・介護分野という独立した客層への特化商品。
+2026-08-31,coloring_japan,jp-goshuin-jinja,Goshuin/Shrine-Temple Architecture Coloring (Whitespace),6,60,,Low,0,WATCH,1,false,false,false,「見つからない」ことの確認であり積極的需要シグナルではない。楽天/BOOTH側の裏付けを次回優先確認。特定寺社のロゴ・御紋章の使用は避けること。
+2026-08-31,coloring_japan,jp-capybara-original,"Capybara (Original, Non-IP) Coloring",7,55,,Low,0,WATCH,3,false,false,false,既存キャラクター「カピバラさん」(トライワークス)はIP該当のため模倣は避けること。3市場で独立に「未確認」という一致した消極的シグナルがある点でconfidenceをLowながらも記録価値ありと判断。
+2026-08-31,coloring_japan,jp-mushroom-import,Mushroom Motif (Import from Overseas Cottagecore Trend),8,50,,Low,0,WATCH,1,false,false,false,海外版coloring themes.jsonのcottagecore-mushroom-garden(TEST)と概念的に対応。海外トレンドの国内輸入候補として継続観察。
+2026-08-31,coloring_japan,jp-tenshi-kaiwai,Tenshi Kaiwai (Angel Subculture Aesthetic) Coloring,9,48,,Low,0,WATCH,1,false,false,false,SNS単独の情報。他市場での裏付けなしに商品化判断してはならない(config.jsonの原則通り)。
+2026-08-31,coloring_japan,jp-oshikatsu-non-ip,Non-IP 'Oshikatsu' (Fan Activity) Coloring (Hypothesis),10,45,,Low,0,WATCH,1,false,false,false,仮説段階(WATCH)。実在商品としての裏付けが得られるまでスコアリングは暫定。次回BOOTH/Minne/Creemaで個人クリエイターの先行事例を重点確認。

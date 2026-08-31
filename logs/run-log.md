@@ -92,3 +92,35 @@
 - RESEARCH INCOMPLETE: いいえ
 - 既知の不具合(申し送り): `scripts/compare-history.mjs`が`trend-history.json`のcategory(coloring/sticker)を区別せず「直近の日付」を選ぶため、片方のモジュールしか実行しない週は誤った基準日と比較される(今回は2026-08-27のstickerスナップショットが誤って選ばれた)。本レポートではcategoryフィルタ済みの一時履歴ファイルを作成して回避したが、スクリプトへの`--category`オプション追加を次回以降のTODOとする。また、2026-08-31分の自動実行(run #33360353072)が「成功」ステータスで何も生成しなかった根本原因調査は、本セッションのスコープ外として未着手。
 - 備考: `git config user.name`/`user.email`はこのセッションの環境設定に従う(通常のgit ID)。作業ブランチは`claude/weekly-research-error-38wfqt`(セッション指定のため、指示書section 14記載の「mainへ直接push」ではなく当該ブランチへpush)。
+
+## 2026-08-31 (日本市場向け塗り絵モジュール、初回リサーチ)
+- トリガー: 人間からの直接指示(「日本市場のリサーチもおねがいします」。ステッカーモジュールを一時停止し、
+  代わりに塗り絵の日本版を追加する方針をユーザーが選択)
+- 実施内容:
+  - `prompts/japan-coloring-research.md` を新規作成、`config/research-config.json` に
+    `japan_markets`(Amazon.co.jp / 楽天市場 / BOOTH・Minne・Creema / X・Instagram日本語圏 /
+    Google検索日本語)と `ip_risk_blocklist_jp_additional` を追加
+  - Amazon.co.jp/楽天市場/BOOTH・Minne・Creema/X・Instagram日本語圏/Google検索(日本語)の
+    5市場を並行調査エージェントで実施(初回のためBASELINE)
+  - `research/raw/japan-{amazon,rakuten,handmade,social,google}/2026-08-31-*-research.md` を新規作成
+  - `research/reports/2026-08-31-japan-coloring-weekly-report.md` を作成
+  - `research/themes/themes-japan.json` を新規作成(10テーマ、schema_version 1.0)
+  - `research/history/trend-history.csv` / `.json` に `category: coloring_japan` で10行を追記
+- 成功ソース: 5市場いずれもWebSearch経由の情報取得は成功。オリムパスの「花ぬりえ」、
+  インプレス塗り絵コンテスト2026、グラフィック社『ひみつの花園』日本発売10周年フェア等の
+  実在する一次情報も特定
+- 失敗ソース: amazon.co.jp/rakuten.co.jp(ranking/books含む)/booth.pm/minne.com/creema.jp/
+  x.com/instagram.com/search.yahoo.co.jp/note.comへの直接WebFetchは全件`EGRESS_BLOCKED`。
+  さらに日本語の一般ニュース・出版社サイト(PR TIMES、河出書房新社、日経、Wikipedia等)への
+  直接WebFetchもほぼ全滅しており、海外調査時よりアクセス制約が強いことが判明
+- 検出テーマ数: 10 (新規: 10 — 日本版モジュール初回のため全件新規)
+- BUILD NOW: 1件 / TEST: 4件 / WATCH: 5件 / AVOID: 0件
+- RESEARCH INCOMPLETE: いいえ
+- IPリスク観察: ちいかわ・すみっコぐらし・リラックマ・推しの子・Sanrio系・カピバラさん・
+  御城プロジェクトRE等、既存IP関連商品を複数確認したが、いずれも事実記録のみで商品化候補には含めていない
+- 申し送り: 御朱印・神社仏閣建築/カピバラ(オリジナル)/きのこモチーフの3テーマは「海外または
+  隣接市場に需要はあるが国内で未確認」という空白地帯候補のため、次回は楽天市場・BOOTH側を
+  優先確認すること。`scripts/compare-history.mjs`のcategory区別に関する既知の制限は日本版にも
+  同様に適用される。
+- 備考: ステッカーモジュールは今回のセッションでは一切変更していない(一時停止のステータス表記のみ
+  `config/research-config.json`に追加、データ・設定は保持)。
