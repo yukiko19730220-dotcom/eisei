@@ -81,6 +81,10 @@ jobs:
             --max-turns 60
             --model claude-sonnet-5
             --allowedTools "Read,Write,Edit,Bash,Glob,Grep,WebSearch,WebFetch"
+          # 診断用: 2026-08-31の週次実行が「成功」を報告しながら実際には何も生成しなかった原因を
+          # 特定するため、一時的にフル出力を有効化している。原因が判明し再発防止策を入れたら
+          # false に戻すか、この行自体を削除してよい。
+          show_full_output: true
 
       - name: Validate this week's output (independent final check)
         run: node scripts/validate-output.mjs --date "$(date -u +%F)"
