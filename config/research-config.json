@@ -10,10 +10,11 @@
   ],
 
   "schedule": {
+    "status": "PAUSED (2026-08-31時点)",
     "cron_utc": "10 0 * * 1",
-    "human_readable": "毎週月曜 09:10 JST (= 毎週月曜 00:10 UTC)",
-    "note": "cronはUTC基準。JSTからUTCへの変換は 'JST - 9時間'。時刻を変更する場合は .github/workflows/coloring-trend-research.yml の cron 行と、このファイルの cron_utc / human_readable を両方更新すること。現時点でこのスケジュール済みワークフローが自動実行するのは塗り絵モジュール(prompts/weekly-research.md)のみ。ステッカーモジュール(prompts/sticker-research.md)はまだGitHub Actionsに接続されていない(手動実行のみ想定)。",
-    "manual_trigger": "workflow_dispatch で常時手動実行可能(塗り絵モジュールのみ、現時点)"
+    "human_readable": "毎週月曜 09:10 JST (= 毎週月曜 00:10 UTC) ※現在は自動実行を停止中",
+    "note": "2026-08-31: 自動実行が「成功」を報告しながら実際には何も生成しない不具合が2週連続で発生し、原因調査にも追加費用がかかったため、ユーザーの判断で .github/workflows/coloring-trend-research.yml の schedule トリガーをコメントアウトして自動実行を停止した(詳細は logs/run-log.md 参照)。当面は手動セッション(チャットで都度依頼)で運用する。自動実行を再開する場合は、当該ワークフローの schedule ブロックを復元し、このフィールドの status も更新すること。cronはUTC基準。JSTからUTCへの変換は 'JST - 9時間'。時刻を変更する場合は .github/workflows/coloring-trend-research.yml の cron 行と、このファイルの cron_utc / human_readable を両方更新すること。現時点でこのワークフローが対象とするのは塗り絵モジュール(prompts/weekly-research.md)のみ。ステッカーモジュール(prompts/sticker-research.md)はまだGitHub Actionsに接続されていない(手動実行のみ想定)。",
+    "manual_trigger": "workflow_dispatch ボタンは残しているが、原因が解明・修正されるまでは積極的な利用は非推奨(塗り絵モジュールのみ、現時点)"
   },
 
   "markets": [

@@ -5,11 +5,17 @@ name: Coloring Book Trend Research (Weekly)
 # このYAMLはあくまで「いつ・どうやってClaude Codeを起動するか」だけを担当する。
 
 on:
-  schedule:
-    # 毎週月曜 09:10 JST = 毎週月曜 00:10 UTC
-    # 時刻を変更する場合はここと config/research-config.json の schedule.cron_utc を両方更新すること。
-    # 00分ちょうどはGitHub Actions全体で混雑しやすいため、意図的に10分ずらしている。
-    - cron: "10 0 * * 1"
+  # 2026-08-31: 自動実行(schedule)が「成功」を報告しながら実際には調査・保存を一切行わない
+  # 不具合が2週連続で発生し(詳細は logs/run-log.md 参照)、原因調査のテスト実行にも追加費用が
+  # かかったため、ユーザーの判断で自動実行を停止した。当面は手動セッション(チャットで
+  # 「リサーチお願いします」等と依頼する運用)に切り替える。手動実行(workflow_dispatch)は
+  # ボタンとして残すが、原因が解明・修正されるまでは積極的な利用は推奨しない。
+  # 自動実行を再開する場合は、以下のscheduleブロックのコメントアウトを解除すること。
+  # schedule:
+  #   # 毎週月曜 09:10 JST = 毎週月曜 00:10 UTC
+  #   # 時刻を変更する場合はここと config/research-config.json の schedule.cron_utc を両方更新すること。
+  #   # 00分ちょうどはGitHub Actions全体で混雑しやすいため、意図的に10分ずらしている。
+  #   - cron: "10 0 * * 1"
   workflow_dispatch:
     inputs:
       note:
